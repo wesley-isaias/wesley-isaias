@@ -1,52 +1,58 @@
-# Zayuni: SaaS for healthcare professionals
+# Zayuni: practice management for health professionals
 
-[← Back to profile](../README.md) · [🇧🇷 Português](./pt-br/zayuni.md)
+[← Back to profile](../README.md) · [🇧🇷 Português](./pt-br/zayuni.md) · [▶ The story](https://wesley-isaias.github.io/wesley-isaias/)
 
 | | |
 | --- | --- |
-| **Role** | Product development: architecture, front-end, data and releases |
+| **Role** | Creator: product, architecture, front-end, back-end, data and releases |
 | **Status** | In active development · [app.zayuni.com](https://app.zayuni.com) (sign-in required) |
-| **Stack** | Responsive web app · Supabase (PostgreSQL, Auth) · Git/GitHub with staging and production |
+| **Stack** | Expo · React Native Web · Expo Router · PWA · Python · FastAPI · Supabase (Auth, PostgreSQL, row-level security) · Docker · Google Cloud Run · Secret Manager |
+| **Evidence** | 425 backend tests passing (`pytest`) · 43 front-end test files · 51 SQL migrations · 442 commits since September 2026 |
 
 ## Problem
 
-Independent healthcare professionals often run their practice across paper notebooks, spreadsheets and messaging apps. Appointments, patient history and payments end up in different places, which leads to scheduling errors, lost information and little financial visibility.
+Independent health professionals and small clinics often keep appointments in a notebook, patients in a spreadsheet and payments in WhatsApp chats. Information gets lost, double bookings happen, and nobody knows what was actually received at the end of the month.
 
-## What I'm building
+## What I built
 
-One platform that covers the daily routine of a practice:
+One app for the working day, on phone, tablet and desktop:
 
-- **Scheduling:** appointments, availability and service types
-- **Patients:** records and care history linked to the professional's account
-- **Appointments:** fast registration flows during the working day
-- **Finance:** revenue and payment tracking per service
-
-The interface is designed for phone, tablet and desktop, since professionals switch devices during the day.
+- **Schedule:** appointments, weekly availability presets and a service catalog
+- **Patients:** records, search and care history scoped to the professional's account
+- **Finance:** charges, service packages, payment reminders, receipts and tax IDs (CPF/CNPJ)
+- **Dashboard:** daily and monthly figures for the practice
+- **Calendar sync:** appointments sync to Google Calendar (OAuth) and iCloud (CalDAV)
 
 ## Architecture
 
 ```mermaid
 flowchart LR
-  A[Responsive web client] --> B[Application layer]
-  B --> C[Authentication & authorization]
-  B --> D[Persistence & sync]
-  D --> E[(Account-scoped data · PostgreSQL)]
-  B --> F[External services & integrations]
+  A[Expo app<br>React Native Web · PWA] --> B[FastAPI<br>REST API]
+  B --> C[Supabase Auth]
+  B --> D[(PostgreSQL<br>row-level security)]
+  B --> E[Google Calendar · iCloud CalDAV]
+  A --> F[On-device OCR<br>pdf.js · tesseract.js]
 ```
 
 *Simplified view; it does not show the exact production topology.*
 
-## Engineering challenges and decisions
+## Engineering decisions
 
-**Multi-device consistency.** When the same record is edited on more than one device, updates must not overwrite valid data. I designed the persistence and sync flows so that each change is applied on purpose and never silently replaced.
+**Tenant isolation in the database.** Every query carries an organization and user scope, and PostgreSQL row-level security enforces it in the data layer. A bug in the UI cannot expose another practice's patients.
 
-**Tenant isolation and privacy.** Every record belongs to one account, and access rules are enforced in the data layer, not only in the UI. Health-related information is handled as sensitive data.
+**Payment receipts read on the device.** When a patient sends a Pix receipt as a PDF or image, the professional's device reads it with OCR (pdf.js and tesseract.js). The file never reaches the server: only the extracted fields do (amount, date, payer, payee key and the Pix EndToEndId), and a deterministic matcher suggests who paid. A receipt is not proof of payment, so the professional confirms against the bank before anything is recorded. The OCR assets are self-hosted and pinned by hash, so a CDN change cannot alter them. The parser also handles masked or OCR-damaged keys such as `•••.982.247-••`.
 
-**Safe, incremental delivery.** Staging and production are separate. Changes are validated in staging before release, and database changes are planned to be reversible.
+**Pix without an intermediary.** Pix charges are generated as standard BR Codes, with key validation for e-mail, phone, CPF/CNPJ and random keys.
 
-**Low-friction UX.** I cut unnecessary steps from registration, scheduling and appointment flows so the tool fits a busy clinical routine.
+**Calendar providers behind a boundary.** Appointments belong to the Zayuni core. Providers only receive a minimal, provider-neutral event projection, and their OAuth refresh tokens and credentials are encrypted at rest.
+
+**Protected production.** Merging to `main` deploys to staging. Production is a separate, explicit promotion through Cloud Build. Dedicated regression workflows guard critical areas: agenda time zones, finance receipts and patient search.
+
+## Built with AI agents
+
+Zayuni is developed with AI coding agents working through the [MCP workspace](./mcp.md) and [DevCore](./devcore.md). Agents work on feature branches. Every change goes through tests, CI and human review, and nothing reaches production without an explicit promotion.
 
 ## Next milestones
 
 - Public demo with fictional data
-- Screenshots and a short walkthrough of the main flows
+- Short walkthrough video of the main flows

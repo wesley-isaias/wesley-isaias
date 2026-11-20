@@ -8,45 +8,53 @@
 
 Brazil (UTC−3) · Open to remote roles in Brazil and internationally
 
-[Featured work](#featured-work) · [Tech stack](#tech-stack) · [Zayuni](https://app.zayuni.com) · [🇧🇷 Versão em português](./README.pt-BR.md)
+[The story](https://wesley-isaias.github.io/wesley-isaias/) · [Featured work](#featured-work) · [Tech stack](#tech-stack) · [Zayuni](https://app.zayuni.com) · [🇧🇷 Versão em português](./README.pt-BR.md)
 
 </div>
 
 ---
 
-I build AI engineering infrastructure and full-stack web products. My work includes **DevCore**, a model-agnostic engine that runs AI coding agents under deterministic guardrails; the security layer of an **MCP workspace** that connects ChatGPT and Claude to isolated development environments; and full-stack web platforms built with Next.js and Supabase.
+**Zayuni is the product: a healthcare SaaS. To build it quickly as a small team without risking patient data or production, I built the infrastructure around the AI agents that help develop it:** the **MCP workspace** controls *where* agents work and *what* they can reach, and **DevCore** controls *how* their tasks run and *how* the result is verified.
+
+**[▶ Read the story: a scrolling walkthrough of the whole system](https://wesley-isaias.github.io/wesley-isaias/)**
 
 I work end to end: requirements, data modeling, UI, integrations, testing and controlled releases. Data integrity, security and privacy are core requirements in all of it.
 
 ## Featured work
 
-### DevCore: execution engine for AI coding agents
-Separates model reasoning from execution. Models get only an allow-listed tool surface, real checks run in an isolated runner, and every task ends as one reviewable pull request. Routing decides per task whether to skip the model, use a local model, use a stronger model or ask a human.
-<br>`Python` `LLM routing` `Ollama-compatible local inference` `Docker` `GitHub API` · **141 automated tests**
-<br>**[Case study](./projects/devcore.md)**
+### 1 · The product
 
-### Zayuni Dev Workspace: secure MCP access for AI agents
-Security layer for an MCP-based development workspace used from ChatGPT and Claude: a Git gateway that inspects every push and keeps the GitHub token out of the workspace, JWT verification in front of the MCP endpoint, and a tamper-evident audit log.
+#### Zayuni: practice management for health professionals
+Scheduling, patient records, care history and finances in one app for phone, tablet and desktop. Appointments sync to Google Calendar and iCloud, Pix charges as BR Codes, and payment receipts read by OCR on the device, so receipts never leave the phone. Every row is scoped per account with row-level security.
+<br>`Expo` `React Native Web` `Python` `FastAPI` `Supabase` `PostgreSQL RLS` `Cloud Run` · **425 backend tests · 51 SQL migrations · 442 commits**
+<br>**[Case study](./projects/zayuni.md)** · **[Product](https://app.zayuni.com)**
+
+### 2 · The AI infrastructure behind it
+
+#### Zayuni Dev Workspace: secure MCP access for AI agents
+*Where agents work.* ChatGPT and Claude connect over MCP to an isolated container that holds no credentials. A Git gateway inspects every push and keeps the GitHub token out of the workspace, a JWT verifier guards the MCP endpoint, and a tamper-evident audit log records every action.
 <br>`MCP` `Python` `Node.js` `OAuth/JWT` `Docker` `Cloudflare Access` · **81 gateway tests + offline security checks in CI**
 <br>**[Case study](./projects/mcp.md)**
 
-### Sergipe Surf Federation: athlete and competition platform
-Public website and authenticated platform for a state sports federation: athlete registration, memberships, event entries, Pix and card payments with webhooks, rankings and an admin area.
-<br>`Next.js 16` `React 19` `TypeScript` `Supabase` `Mercado Pago` `Google Cloud Run` · **21 SQL migrations · lint, typecheck and tests in CI**
-<br>**[Case study](./projects/fss.md)**
+#### DevCore: execution engine for AI coding agents
+*How tasks run.* The model only proposes actions through allow-listed tools. A router picks the cheapest capable route (no model, local model, stronger model or human), checks run in an isolated runner, and every task ends as one reviewable pull request.
+<br>`Python` `LLM routing` `Ollama-compatible local inference` `Docker` `GitHub API` · **141 automated tests**
+<br>**[Case study](./projects/devcore.md)**
 
-### Zayuni: SaaS for healthcare professionals
-Scheduling, patient records, appointments and financial management for independent practitioners, built for phone, tablet and desktop.
-<br>`Supabase` `PostgreSQL` `Responsive web` `Staging → production`
-<br>**[Case study](./projects/zayuni.md)** · **[Product](https://app.zayuni.com)**
+### 3 · The same discipline, for a client
+
+#### Sergipe Surf Federation: athlete and competition platform
+Public website and athlete platform for a state sports federation: registration, memberships, event entries, Pix and card payments with webhooks, rankings imported from LiveHeats, and an admin area.
+<br>`Next.js 16` `React 19` `TypeScript` `Supabase` `Mercado Pago` `Google Cloud Run` · **49 tests · 21 SQL migrations · lint and typecheck in CI**
+<br>**[Case study](./projects/fss.md)**
 
 ## Tech stack
 
 | Area | Technologies |
 | --- | --- |
 | **Languages** | TypeScript, Python, JavaScript, SQL |
-| **Front-end** | React 19, Next.js (App Router), responsive interfaces |
-| **Back-end & data** | Node.js, Python, Supabase (PostgreSQL, Auth, SQL migrations), REST APIs, webhooks, Mercado Pago (Pix, card) |
+| **Front-end** | React 19, Next.js (App Router), Expo / React Native Web, PWA, responsive interfaces |
+| **Back-end & data** | Python (FastAPI), Node.js, Supabase (PostgreSQL, Auth, row-level security, SQL migrations), REST APIs, webhooks, Pix (BR Code, Mercado Pago), Google Calendar & CalDAV |
 | **AI engineering** | Model Context Protocol (MCP), coding-agent orchestration, model routing (local ↔ frontier ↔ human), Ollama-compatible local inference, agent telemetry |
 | **Security** | OAuth/JWT verification (RS256, fail-closed), credential isolation, Git push inspection, HMAC-chained audit logs, least privilege |
 | **Infrastructure** | Linux, Docker, Google Cloud Run & Cloud Build, Cloudflare, GitHub Actions, CircleCI |

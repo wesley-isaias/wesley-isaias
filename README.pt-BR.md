@@ -8,45 +8,53 @@
 
 Brasil (UTC−3) · Aberto a oportunidades remotas no Brasil e no exterior
 
-[Projetos](#projetos-em-destaque) · [Tecnologias](#tecnologias) · [Zayuni](https://app.zayuni.com) · [🇺🇸 English version](./README.md)
+[A história](https://wesley-isaias.github.io/wesley-isaias/) · [Projetos](#projetos-em-destaque) · [Tecnologias](#tecnologias) · [Zayuni](https://app.zayuni.com) · [🇺🇸 English version](./README.md)
 
 </div>
 
 ---
 
-Desenvolvo infraestrutura de engenharia de IA e produtos web full-stack. Meu trabalho inclui o **DevCore**, um motor agnóstico de modelo que executa agentes de código com controles determinísticos; a camada de segurança de um **workspace MCP** que conecta ChatGPT e Claude a ambientes de desenvolvimento isolados; e plataformas web full-stack com Next.js e Supabase.
+**O Zayuni é o produto: um SaaS de saúde. Para desenvolvê-lo rápido, com equipe pequena, sem arriscar dados de pacientes nem a produção, construí a infraestrutura em volta dos agentes de IA que ajudam a desenvolvê-lo:** o **workspace MCP** controla *onde* os agentes trabalham e *o que* podem acessar, e o **DevCore** controla *como* as tarefas são executadas e *como* o resultado é verificado.
+
+**[▶ Leia a história: um passeio pelo sistema inteiro, rolando a página](https://wesley-isaias.github.io/wesley-isaias/)**
 
 Atuo de ponta a ponta: requisitos, modelagem de dados, interface, integrações, testes e entregas controladas. Integridade de dados, segurança e privacidade são requisitos centrais em todo esse processo.
 
 ## Projetos em destaque
 
-### DevCore: motor de execução para agentes de código
-Separa o raciocínio do modelo da execução. O modelo só acessa um conjunto restrito de ferramentas, as verificações reais rodam em um executor isolado, e cada tarefa termina em um único pull request revisável. Um roteador decide, por tarefa, se dispensa o modelo, usa um modelo local, usa um modelo mais forte ou pede decisão humana.
-<br>`Python` `Roteamento de LLMs` `Inferência local compatível com Ollama` `Docker` `API do GitHub` · **141 testes automatizados**
-<br>**[Estudo de caso](./projects/pt-br/devcore.md)**
+### 1 · O produto
 
-### Zayuni Dev Workspace: acesso MCP seguro para agentes de IA
-Camada de segurança de um workspace de desenvolvimento baseado em MCP, usado a partir do ChatGPT e do Claude: um gateway Git que inspeciona cada push e mantém o token do GitHub fora do workspace, verificação de JWT na frente do endpoint MCP e um log de auditoria à prova de adulteração.
+#### Zayuni: gestão de consultório para profissionais de saúde
+Agenda, pacientes, histórico de atendimentos e financeiro num app para celular, tablet e computador. Agendamentos sincronizados com Google Calendar e iCloud, cobranças Pix como BR Code e comprovantes lidos por OCR no próprio aparelho, sem que o comprovante saia do celular. Cada registro fica restrito à sua conta por row-level security.
+<br>`Expo` `React Native Web` `Python` `FastAPI` `Supabase` `PostgreSQL RLS` `Cloud Run` · **425 testes no backend · 51 migrações SQL · 442 commits**
+<br>**[Estudo de caso](./projects/pt-br/zayuni.md)** · **[Produto](https://app.zayuni.com)**
+
+### 2 · A infraestrutura de IA por trás dele
+
+#### Zayuni Dev Workspace: acesso MCP seguro para agentes de IA
+*Onde os agentes trabalham.* ChatGPT e Claude se conectam por MCP a um contêiner isolado, sem credenciais. Um gateway Git inspeciona cada push e mantém o token do GitHub fora do workspace, um verificador JWT protege o endpoint MCP, e um log de auditoria à prova de adulteração registra cada ação.
 <br>`MCP` `Python` `Node.js` `OAuth/JWT` `Docker` `Cloudflare Access` · **81 testes do gateway + checks de segurança offline na CI**
 <br>**[Estudo de caso](./projects/pt-br/mcp.md)**
 
-### Federação Sergipana de Surf: plataforma de atletas e competições
-Site público e plataforma autenticada para uma federação esportiva estadual: cadastro de atletas, filiações, inscrições em etapas, pagamentos por Pix e cartão com webhooks, ranking e área administrativa.
-<br>`Next.js 16` `React 19` `TypeScript` `Supabase` `Mercado Pago` `Google Cloud Run` · **21 migrações SQL · lint, typecheck e testes na CI**
-<br>**[Estudo de caso](./projects/pt-br/fss.md)**
+#### DevCore: motor de execução para agentes de código
+*Como as tarefas rodam.* O modelo só propõe ações por ferramentas permitidas. Um roteador escolhe a rota mais barata capaz de resolver (sem modelo, modelo local, modelo mais forte ou humano), as verificações rodam num executor isolado, e cada tarefa termina em um único pull request revisável.
+<br>`Python` `Roteamento de LLMs` `Inferência local compatível com Ollama` `Docker` `API do GitHub` · **141 testes automatizados**
+<br>**[Estudo de caso](./projects/pt-br/devcore.md)**
 
-### Zayuni: SaaS para profissionais de saúde
-Agenda, cadastro de pacientes, atendimentos e gestão financeira para profissionais autônomos, com interface para celular, tablet e computador.
-<br>`Supabase` `PostgreSQL` `Web responsiva` `Staging → produção`
-<br>**[Estudo de caso](./projects/pt-br/zayuni.md)** · **[Produto](https://app.zayuni.com)**
+### 3 · A mesma disciplina, para um cliente
+
+#### Federação Sergipana de Surf: plataforma de atletas e competições
+Site público e plataforma do atleta para uma federação esportiva estadual: cadastro, filiações, inscrições em etapas, pagamentos por Pix e cartão com webhooks, ranking importado do LiveHeats e área administrativa.
+<br>`Next.js 16` `React 19` `TypeScript` `Supabase` `Mercado Pago` `Google Cloud Run` · **49 testes · 21 migrações SQL · lint e typecheck na CI**
+<br>**[Estudo de caso](./projects/pt-br/fss.md)**
 
 ## Tecnologias
 
 | Área | Tecnologias |
 | --- | --- |
 | **Linguagens** | TypeScript, Python, JavaScript, SQL |
-| **Front-end** | React 19, Next.js (App Router), interfaces responsivas |
-| **Back-end e dados** | Node.js, Python, Supabase (PostgreSQL, Auth, migrações SQL), APIs REST, webhooks, Mercado Pago (Pix, cartão) |
+| **Front-end** | React 19, Next.js (App Router), Expo / React Native Web, PWA, interfaces responsivas |
+| **Back-end e dados** | Python (FastAPI), Node.js, Supabase (PostgreSQL, Auth, row-level security, migrações SQL), APIs REST, webhooks, Pix (BR Code, Mercado Pago), Google Calendar e CalDAV |
 | **Engenharia de IA** | Model Context Protocol (MCP), orquestração de agentes de código, roteamento de modelos (local ↔ avançado ↔ humano), inferência local compatível com Ollama, telemetria de agentes |
 | **Segurança** | Verificação OAuth/JWT (RS256, falha fechada), isolamento de credenciais, inspeção de push Git, logs de auditoria encadeados por HMAC, privilégio mínimo |
 | **Infraestrutura** | Linux, Docker, Google Cloud Run e Cloud Build, Cloudflare, GitHub Actions, CircleCI |
