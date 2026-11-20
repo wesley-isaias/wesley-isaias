@@ -2,7 +2,7 @@
 
 # Wesley Isaias
 
-**Software Engineer · Full-Stack Web · AI Engineering & MCP**
+**Software Developer · Digital Products · AI Engineering & MCP**
 
 Brazil (UTC−3) · Open to remote roles in Brazil and internationally
 
@@ -48,6 +48,10 @@ A web platform and administrative workflows for a state sports federation, with 
 | **AI engineering** | Model Context Protocol (MCP), AI coding agents, local LLM inference, automation |
 | **Infrastructure** | Linux, Docker, remote development environments, GitHub Actions, CircleCI |
 | **Practices** | Pull-request review, automated testing, staging → production releases, least-privilege access |
+
+## Reproducible public example
+
+[**AI tool authorization policy — Python + unit tests + CI**](./examples/agent-policy/README.md). A small, independent demonstration of deny-by-default checks. This is educational code, **not** extracted from the private MCP infrastructure.
 
 ## How I work
 
