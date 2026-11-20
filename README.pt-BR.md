@@ -2,6 +2,8 @@
 
 # Wesley Isaias
 
+[![Public example tests](https://github.com/wesley-isaias/wesley-isaias/actions/workflows/public-example-tests.yml/badge.svg)](https://github.com/wesley-isaias/wesley-isaias/actions/workflows/public-example-tests.yml)
+
 **Desenvolvedor de Software · Produtos Digitais · Engenharia de IA e MCP**
 
 Brasil (UTC−3) · Aberto a oportunidades remotas no Brasil e no exterior
