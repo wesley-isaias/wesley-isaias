@@ -77,7 +77,7 @@ Most of my professional work is in private repositories. The case studies above 
 
 ## Let's talk
 
-I'm open to **full-time or contract** roles in software engineering, full-stack development and AI engineering, remote or hybrid, in Brazil or internationally.
+I'm open to **full-time or contract** roles in software development, full-stack development and AI engineering, remote or hybrid, in Brazil or internationally.
 
 <!-- Add your contact links here, e.g.:
 [LinkedIn](https://www.linkedin.com/in/your-handle) · [Email](mailto:you@example.com)
