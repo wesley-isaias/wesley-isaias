@@ -2,7 +2,7 @@
 
 # Wesley Isaias
 
-**Engenheiro de Software · Full-Stack Web · Engenharia de IA e MCP**
+**Desenvolvedor de Software · Produtos Digitais · Engenharia de IA e MCP**
 
 Brasil (UTC−3) · Aberto a oportunidades remotas no Brasil e no exterior
 
@@ -48,6 +48,10 @@ Plataforma web e fluxos administrativos para uma federação esportiva estadual,
 | **Engenharia de IA** | Model Context Protocol (MCP), agentes de código, inferência com LLMs locais, automação |
 | **Infraestrutura** | Linux, Docker, ambientes de desenvolvimento remotos, GitHub Actions, CircleCI |
 | **Práticas** | Revisão de pull requests, testes automatizados, staging → produção, acesso com privilégio mínimo |
+
+## Exemplo público reproduzível
+
+[**Política de autorização de ferramentas para agentes — Python, testes unitários e CI**](./examples/agent-policy/README.md). Exemplo independente e educacional, sem código extraído do MCP privado.
 
 ## Como trabalho
 
