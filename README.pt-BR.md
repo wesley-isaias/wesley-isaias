@@ -81,4 +81,4 @@ A maior parte do meu trabalho profissional está em repositórios privados. Os e
 
 Estou aberto a oportunidades **CLT, PJ ou contrato internacional** em desenvolvimento de software, desenvolvimento full-stack e engenharia de IA, remotas ou híbridas, no Brasil ou no exterior.
 
-**[Fale comigo no LinkedIn](https://www.linkedin.com/in/wesley-isaias)** · **[Leia a história](https://wesley-isaias.github.io/wesley-isaias/)**
+**[Fale comigo no LinkedIn](https://www.linkedin.com/in/wesley-isaias)** · **E-mail:** [wesley_isaias@hotmail.com](mailto:wesley_isaias@hotmail.com) · **[Leia a história](https://wesley-isaias.github.io/wesley-isaias/)**

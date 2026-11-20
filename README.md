@@ -81,4 +81,4 @@ Most of my professional work is in private repositories. The case studies above 
 
 I'm open to **full-time or contract** roles in software development, full-stack development and AI engineering, remote or hybrid, in Brazil or internationally.
 
-**[Connect on LinkedIn](https://www.linkedin.com/in/wesley-isaias)** · **[Read the story](https://wesley-isaias.github.io/wesley-isaias/)**
+**[Connect on LinkedIn](https://www.linkedin.com/in/wesley-isaias)** · **Email:** [wesley_isaias@hotmail.com](mailto:wesley_isaias@hotmail.com) · **[Read the story](https://wesley-isaias.github.io/wesley-isaias/)**
