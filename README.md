@@ -14,42 +14,43 @@ Brazil (UTC−3) · Open to remote roles in Brazil and internationally
 
 ---
 
-I build web products and developer tooling where software engineering meets AI. I'm currently developing **Zayuni**, a SaaS platform for healthcare professionals, and an **MCP-based workspace** that lets AI agents work on development environments under explicit, scoped permissions.
+I build AI engineering infrastructure and full-stack web products. My work includes **DevCore**, a model-agnostic engine that runs AI coding agents under deterministic guardrails; the security layer of an **MCP workspace** that connects ChatGPT and Claude to isolated development environments; and full-stack web platforms built with Next.js and Supabase.
 
 I work end to end: requirements, data modeling, UI, integrations, testing and controlled releases. Data integrity, security and privacy are core requirements in all of it.
 
 ## Featured work
+
+### DevCore: execution engine for AI coding agents
+Separates model reasoning from execution. Models get only an allow-listed tool surface, real checks run in an isolated runner, and every task ends as one reviewable pull request. Routing decides per task whether to skip the model, use a local model, use a stronger model or ask a human.
+<br>`Python` `LLM routing` `Ollama-compatible local inference` `Docker` `GitHub API` · **141 automated tests**
+<br>**[Case study](./projects/devcore.md)**
+
+### Zayuni Dev Workspace: secure MCP access for AI agents
+Security layer for an MCP-based development workspace used from ChatGPT and Claude: a Git gateway that inspects every push and keeps the GitHub token out of the workspace, JWT verification in front of the MCP endpoint, and a tamper-evident audit log.
+<br>`MCP` `Python` `Node.js` `OAuth/JWT` `Docker` `Cloudflare Access` · **81 gateway tests + offline security checks in CI**
+<br>**[Case study](./projects/mcp.md)**
+
+### Sergipe Surf Federation: athlete and competition platform
+Public website and authenticated platform for a state sports federation: athlete registration, memberships, event entries, Pix and card payments with webhooks, rankings and an admin area.
+<br>`Next.js 16` `React 19` `TypeScript` `Supabase` `Mercado Pago` `Google Cloud Run` · **21 SQL migrations · lint, typecheck and tests in CI**
+<br>**[Case study](./projects/fss.md)**
 
 ### Zayuni: SaaS for healthcare professionals
 Scheduling, patient records, appointments and financial management for independent practitioners, built for phone, tablet and desktop.
 <br>`Supabase` `PostgreSQL` `Responsive web` `Staging → production`
 <br>**[Case study](./projects/zayuni.md)** · **[Product](https://app.zayuni.com)**
 
-### Zayuni Dev Workspace: MCP tooling for AI agents
-A Model Context Protocol (MCP) integration that gives AI agents access to development tools on remote Linux environments. Permissions are scoped, and sensitive operations need human approval.
-<br>`MCP` `AI agents` `Linux` `Docker`
-<br>**[Case study](./projects/mcp.md)**
-
-### AI-assisted software engineering
-A delivery workflow in which AI coding agents plan, implement and test small, reviewable changes. Acceptance criteria, CI and human review gate every step.
-<br>`AI coding agents` `Local LLMs` `GitHub` `CI/CD`
-<br>**[Case study](./projects/ai-engineering.md)**
-
-### Sergipe Surf Federation: web platform
-A web platform and administrative workflows for a state sports federation, with role-based access and separate staging and production environments.
-<br>`Web application` `Access control` `Release management`
-<br>**[Case study](./projects/fss.md)**
-
 ## Tech stack
 
 | Area | Technologies |
 | --- | --- |
-| **Languages** | TypeScript, JavaScript, SQL |
-| **Front-end** | React, Next.js, responsive interfaces |
-| **Back-end & data** | Node.js, Supabase (PostgreSQL, Auth), REST APIs, third-party integrations |
-| **AI engineering** | Model Context Protocol (MCP), AI coding agents, local LLM inference, automation |
-| **Infrastructure** | Linux, Docker, remote development environments, GitHub Actions, CircleCI |
-| **Practices** | Pull-request review, automated testing, staging → production releases, least-privilege access |
+| **Languages** | TypeScript, Python, JavaScript, SQL |
+| **Front-end** | React 19, Next.js (App Router), responsive interfaces |
+| **Back-end & data** | Node.js, Python, Supabase (PostgreSQL, Auth, SQL migrations), REST APIs, webhooks, Mercado Pago (Pix, card) |
+| **AI engineering** | Model Context Protocol (MCP), coding-agent orchestration, model routing (local ↔ frontier ↔ human), Ollama-compatible local inference, agent telemetry |
+| **Security** | OAuth/JWT verification (RS256, fail-closed), credential isolation, Git push inspection, HMAC-chained audit logs, least privilege |
+| **Infrastructure** | Linux, Docker, Google Cloud Run & Cloud Build, Cloudflare, GitHub Actions, CircleCI |
+| **Practices** | Pull-request review, automated testing, staging → production releases, reversible migrations |
 
 ## Reproducible public example
 

@@ -14,42 +14,43 @@ Brasil (UTC−3) · Aberto a oportunidades remotas no Brasil e no exterior
 
 ---
 
-Desenvolvo produtos web e ferramentas para desenvolvedores na interseção entre engenharia de software e inteligência artificial. Atualmente desenvolvo o **Zayuni**, uma plataforma SaaS para profissionais de saúde, e um **workspace baseado em MCP** que permite a agentes de IA trabalhar em ambientes de desenvolvimento com permissões explícitas e delimitadas.
+Desenvolvo infraestrutura de engenharia de IA e produtos web full-stack. Meu trabalho inclui o **DevCore**, um motor agnóstico de modelo que executa agentes de código com controles determinísticos; a camada de segurança de um **workspace MCP** que conecta ChatGPT e Claude a ambientes de desenvolvimento isolados; e plataformas web full-stack com Next.js e Supabase.
 
 Atuo de ponta a ponta: requisitos, modelagem de dados, interface, integrações, testes e entregas controladas. Integridade de dados, segurança e privacidade são requisitos centrais em todo esse processo.
 
 ## Projetos em destaque
+
+### DevCore: motor de execução para agentes de código
+Separa o raciocínio do modelo da execução. O modelo só acessa um conjunto restrito de ferramentas, as verificações reais rodam em um executor isolado, e cada tarefa termina em um único pull request revisável. Um roteador decide, por tarefa, se dispensa o modelo, usa um modelo local, usa um modelo mais forte ou pede decisão humana.
+<br>`Python` `Roteamento de LLMs` `Inferência local compatível com Ollama` `Docker` `API do GitHub` · **141 testes automatizados**
+<br>**[Estudo de caso](./projects/pt-br/devcore.md)**
+
+### Zayuni Dev Workspace: acesso MCP seguro para agentes de IA
+Camada de segurança de um workspace de desenvolvimento baseado em MCP, usado a partir do ChatGPT e do Claude: um gateway Git que inspeciona cada push e mantém o token do GitHub fora do workspace, verificação de JWT na frente do endpoint MCP e um log de auditoria à prova de adulteração.
+<br>`MCP` `Python` `Node.js` `OAuth/JWT` `Docker` `Cloudflare Access` · **81 testes do gateway + checks de segurança offline na CI**
+<br>**[Estudo de caso](./projects/pt-br/mcp.md)**
+
+### Federação Sergipana de Surf: plataforma de atletas e competições
+Site público e plataforma autenticada para uma federação esportiva estadual: cadastro de atletas, filiações, inscrições em etapas, pagamentos por Pix e cartão com webhooks, ranking e área administrativa.
+<br>`Next.js 16` `React 19` `TypeScript` `Supabase` `Mercado Pago` `Google Cloud Run` · **21 migrações SQL · lint, typecheck e testes na CI**
+<br>**[Estudo de caso](./projects/pt-br/fss.md)**
 
 ### Zayuni: SaaS para profissionais de saúde
 Agenda, cadastro de pacientes, atendimentos e gestão financeira para profissionais autônomos, com interface para celular, tablet e computador.
 <br>`Supabase` `PostgreSQL` `Web responsiva` `Staging → produção`
 <br>**[Estudo de caso](./projects/pt-br/zayuni.md)** · **[Produto](https://app.zayuni.com)**
 
-### Zayuni Dev Workspace: ferramentas MCP para agentes de IA
-Integração baseada no Model Context Protocol (MCP) que dá a agentes de IA acesso a ferramentas de desenvolvimento em ambientes Linux remotos. As permissões são delimitadas, e operações sensíveis exigem aprovação humana.
-<br>`MCP` `Agentes de IA` `Linux` `Docker`
-<br>**[Estudo de caso](./projects/pt-br/mcp.md)**
-
-### Engenharia de software assistida por IA
-Fluxo de entrega em que agentes de IA planejam, implementam e testam mudanças pequenas e revisáveis. Critérios de aceite, CI e revisão humana controlam cada etapa.
-<br>`Agentes de código` `LLMs locais` `GitHub` `CI/CD`
-<br>**[Estudo de caso](./projects/pt-br/ai-engineering.md)**
-
-### Federação Sergipana de Surf: plataforma web
-Plataforma web e fluxos administrativos para uma federação esportiva estadual, com controle de acesso por perfil e ambientes separados de homologação e produção.
-<br>`Aplicação web` `Controle de acesso` `Gestão de releases`
-<br>**[Estudo de caso](./projects/pt-br/fss.md)**
-
 ## Tecnologias
 
 | Área | Tecnologias |
 | --- | --- |
-| **Linguagens** | TypeScript, JavaScript, SQL |
-| **Front-end** | React, Next.js, interfaces responsivas |
-| **Back-end e dados** | Node.js, Supabase (PostgreSQL, Auth), APIs REST, integrações com serviços externos |
-| **Engenharia de IA** | Model Context Protocol (MCP), agentes de código, inferência com LLMs locais, automação |
-| **Infraestrutura** | Linux, Docker, ambientes de desenvolvimento remotos, GitHub Actions, CircleCI |
-| **Práticas** | Revisão de pull requests, testes automatizados, staging → produção, acesso com privilégio mínimo |
+| **Linguagens** | TypeScript, Python, JavaScript, SQL |
+| **Front-end** | React 19, Next.js (App Router), interfaces responsivas |
+| **Back-end e dados** | Node.js, Python, Supabase (PostgreSQL, Auth, migrações SQL), APIs REST, webhooks, Mercado Pago (Pix, cartão) |
+| **Engenharia de IA** | Model Context Protocol (MCP), orquestração de agentes de código, roteamento de modelos (local ↔ avançado ↔ humano), inferência local compatível com Ollama, telemetria de agentes |
+| **Segurança** | Verificação OAuth/JWT (RS256, falha fechada), isolamento de credenciais, inspeção de push Git, logs de auditoria encadeados por HMAC, privilégio mínimo |
+| **Infraestrutura** | Linux, Docker, Google Cloud Run e Cloud Build, Cloudflare, GitHub Actions, CircleCI |
+| **Práticas** | Revisão de pull requests, testes automatizados, staging → produção, migrações reversíveis |
 
 ## Exemplo público reproduzível
 
