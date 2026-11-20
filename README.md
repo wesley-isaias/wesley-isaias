@@ -8,48 +8,59 @@
 
 Brazil (UTC−3) · Open to remote roles in Brazil and internationally
 
-[Featured work](#featured-work) · [Tech stack](#tech-stack) · [Zayuni](https://app.zayuni.com) · [🇧🇷 Versão em português](./README.pt-BR.md)
+[LinkedIn](https://www.linkedin.com/in/wesley-isaias) · [The story](https://wesley-isaias.github.io/wesley-isaias/) · [Featured work](#featured-work) · [Tech stack](#tech-stack) · [Zayuni](https://app.zayuni.com) · [🇧🇷 Versão em português](./README.pt-BR.md)
 
 </div>
 
 ---
 
-I build web products and developer tooling where software engineering meets AI. I'm currently developing **Zayuni**, a SaaS platform for healthcare professionals, and an **MCP-based workspace** that lets AI agents work on development environments under explicit, scoped permissions.
+**Zayuni is the product: a healthcare SaaS with real users, which I founded and develop with AI coding agents inside a strict delivery process.** Every change starts from an approved issue, runs through tests, CI and review, and reaches production only through an explicit promotion. To make that safe, I built and run **Zayuni DevWS**, my own MCP server: ChatGPT and Claude work in my repositories through an isolated workspace that holds no credentials, with every push inspected and every action audited.
+
+**[▶ Read the story: a scrolling walkthrough of the whole system](https://wesley-isaias.github.io/wesley-isaias/)**
 
 I work end to end: requirements, data modeling, UI, integrations, testing and controlled releases. Data integrity, security and privacy are core requirements in all of it.
 
 ## Featured work
 
-### Zayuni: SaaS for healthcare professionals
-Scheduling, patient records, appointments and financial management for independent practitioners, built for phone, tablet and desktop.
-<br>`Supabase` `PostgreSQL` `Responsive web` `Staging → production`
+### 1 · The product
+
+#### Zayuni: practice management for health professionals · *founder*
+Scheduling, patient records, care history and finances in one app for phone, tablet and desktop. Appointments sync to Google Calendar and iCloud, Pix charges as BR Codes, and payment receipts read by OCR on the device, so receipts never leave the phone. Every row is scoped per account with row-level security.
+<br>`Expo` `React Native Web` `Python` `FastAPI` `Supabase` `PostgreSQL RLS` `Cloud Run` · **425 backend tests · 51 SQL migrations · 442 commits**
 <br>**[Case study](./projects/zayuni.md)** · **[Product](https://app.zayuni.com)**
 
-### Zayuni Dev Workspace: MCP tooling for AI agents
-A Model Context Protocol (MCP) integration that gives AI agents access to development tools on remote Linux environments. Permissions are scoped, and sensitive operations need human approval.
-<br>`MCP` `AI agents` `Linux` `Docker`
+### 2 · The AI infrastructure behind it
+
+#### Zayuni DevWS: my own MCP server for AI agents
+*Where agents work.* In daily use since November 2026, including from ChatGPT on my phone. Seven Docker services: OAuth with MFA and a fail-closed JWT check, a workspace with no credentials, a Git gateway that holds the token and refuses pushes to `main`, an egress proxy, and an HMAC-chained audit log anchored to a write-locked bucket.
+<br>`MCP` `Python` `Node.js` `OAuth/JWT` `Docker Compose` `Cloudflare` · **81 gateway tests · branch → push → PR from a phone, PC off**
 <br>**[Case study](./projects/mcp.md)**
 
-### AI-assisted software engineering
-A delivery workflow in which AI coding agents plan, implement and test small, reviewable changes. Acceptance criteria, CI and human review gate every step.
-<br>`AI coding agents` `Local LLMs` `GitHub` `CI/CD`
-<br>**[Case study](./projects/ai-engineering.md)**
+### 3 · The same discipline, for a client
 
-### Sergipe Surf Federation: web platform
-A web platform and administrative workflows for a state sports federation, with role-based access and separate staging and production environments.
-<br>`Web application` `Access control` `Release management`
+#### Sergipe Surf Federation: athlete and competition platform (in development)
+Public website and athlete platform for a state sports federation, in development on staging: registration, memberships, event entries, Pix and card payments with webhooks, rankings imported from LiveHeats, and an admin area.
+<br>`Next.js 16` `React 19` `TypeScript` `Supabase` `Mercado Pago` `Google Cloud Run` · **49 tests · 21 SQL migrations · lint and typecheck in CI**
 <br>**[Case study](./projects/fss.md)**
+
+### Lab
+
+#### DevCore: prototype engine for AI coding tasks
+An experiment from October 2026: the model only proposes actions through allow-listed tools, a router picks the cheapest capable route (no model, local model, stronger model or human), and checks run in an isolated runner before a pull request is opened. It is not part of the production workflow.
+<br>`Python` `LLM routing` `Ollama-compatible local inference` `Docker` · **141 automated tests**
+<br>**[Notes](./projects/devcore.md)**
 
 ## Tech stack
 
 | Area | Technologies |
 | --- | --- |
-| **Languages** | TypeScript, JavaScript, SQL |
-| **Front-end** | React, Next.js, responsive interfaces |
-| **Back-end & data** | Node.js, Supabase (PostgreSQL, Auth), REST APIs, third-party integrations |
-| **AI engineering** | Model Context Protocol (MCP), AI coding agents, local LLM inference, automation |
-| **Infrastructure** | Linux, Docker, remote development environments, GitHub Actions, CircleCI |
-| **Practices** | Pull-request review, automated testing, staging → production releases, least-privilege access |
+| **Languages** | TypeScript, Python, JavaScript, SQL |
+| **Front-end** | React 19, Next.js (App Router), Expo / React Native Web, PWA, responsive interfaces |
+| **Back-end & data** | Python (FastAPI), Node.js, Supabase (PostgreSQL, Auth, row-level security, SQL migrations), REST APIs, webhooks, Pix (BR Code, Mercado Pago), Google Calendar & CalDAV |
+| **AI engineering** | Model Context Protocol (MCP) servers, development with AI coding agents (Claude, ChatGPT), agent security: credential isolation, scoped tools, audit logging · *lab:* model routing and local LLMs |
+| **Security** | OAuth/JWT verification (RS256, fail-closed), credential isolation, Git push inspection, HMAC-chained audit logs, least privilege |
+| **Infrastructure** | Linux, Docker, Google Cloud Run & Cloud Build, Cloudflare, GitHub Actions, CircleCI |
+| **Practices** | Pull-request review, automated testing, staging → production releases, reversible migrations |
 
 ## Reproducible public example
 
@@ -68,8 +79,6 @@ Most of my professional work is in private repositories. The case studies above 
 
 ## Let's talk
 
-I'm open to **full-time or contract** roles in software engineering, full-stack development and AI engineering, remote or hybrid, in Brazil or internationally.
+I'm open to **full-time or contract** roles in software development, full-stack development and AI engineering, remote or hybrid, in Brazil or internationally.
 
-<!-- Add your contact links here, e.g.:
-[LinkedIn](https://www.linkedin.com/in/your-handle) · [Email](mailto:you@example.com)
--->
+**[Connect on LinkedIn](https://www.linkedin.com/in/wesley-isaias)** · **Email:** [wesley_isaias@hotmail.com](mailto:wesley_isaias@hotmail.com) · **[Read the story](https://wesley-isaias.github.io/wesley-isaias/)**

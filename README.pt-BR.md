@@ -8,48 +8,59 @@
 
 Brasil (UTC−3) · Aberto a oportunidades remotas no Brasil e no exterior
 
-[Projetos](#projetos-em-destaque) · [Tecnologias](#tecnologias) · [Zayuni](https://app.zayuni.com) · [🇺🇸 English version](./README.md)
+[LinkedIn](https://www.linkedin.com/in/wesley-isaias) · [A história](https://wesley-isaias.github.io/wesley-isaias/) · [Projetos](#projetos-em-destaque) · [Tecnologias](#tecnologias) · [Zayuni](https://app.zayuni.com) · [🇺🇸 English version](./README.md)
 
 </div>
 
 ---
 
-Desenvolvo produtos web e ferramentas para desenvolvedores na interseção entre engenharia de software e inteligência artificial. Atualmente desenvolvo o **Zayuni**, uma plataforma SaaS para profissionais de saúde, e um **workspace baseado em MCP** que permite a agentes de IA trabalhar em ambientes de desenvolvimento com permissões explícitas e delimitadas.
+**O Zayuni é o produto: um SaaS de saúde com usuários reais, que fundei e desenvolvo com agentes de IA dentro de um processo de entrega rígido.** Toda mudança começa de uma issue aprovada, passa por testes, CI e revisão, e só chega à produção por uma promoção explícita. Para que isso seja seguro, construí e opero o **Zayuni DevWS**, meu próprio servidor MCP: o ChatGPT e o Claude trabalham nos meus repositórios por um workspace isolado e sem credenciais, com cada push inspecionado e cada ação auditada.
+
+**[▶ Leia a história: um passeio pelo sistema inteiro, rolando a página](https://wesley-isaias.github.io/wesley-isaias/)**
 
 Atuo de ponta a ponta: requisitos, modelagem de dados, interface, integrações, testes e entregas controladas. Integridade de dados, segurança e privacidade são requisitos centrais em todo esse processo.
 
 ## Projetos em destaque
 
-### Zayuni: SaaS para profissionais de saúde
-Agenda, cadastro de pacientes, atendimentos e gestão financeira para profissionais autônomos, com interface para celular, tablet e computador.
-<br>`Supabase` `PostgreSQL` `Web responsiva` `Staging → produção`
+### 1 · O produto
+
+#### Zayuni: gestão de consultório para profissionais de saúde · *fundador*
+Agenda, pacientes, histórico de atendimentos e financeiro num app para celular, tablet e computador. Agendamentos sincronizados com Google Calendar e iCloud, cobranças Pix como BR Code e comprovantes lidos por OCR no próprio aparelho, sem que o comprovante saia do celular. Cada registro fica restrito à sua conta por row-level security.
+<br>`Expo` `React Native Web` `Python` `FastAPI` `Supabase` `PostgreSQL RLS` `Cloud Run` · **425 testes no backend · 51 migrações SQL · 442 commits**
 <br>**[Estudo de caso](./projects/pt-br/zayuni.md)** · **[Produto](https://app.zayuni.com)**
 
-### Zayuni Dev Workspace: ferramentas MCP para agentes de IA
-Integração baseada no Model Context Protocol (MCP) que dá a agentes de IA acesso a ferramentas de desenvolvimento em ambientes Linux remotos. As permissões são delimitadas, e operações sensíveis exigem aprovação humana.
-<br>`MCP` `Agentes de IA` `Linux` `Docker`
+### 2 · A infraestrutura de IA por trás dele
+
+#### Zayuni DevWS: meu próprio servidor MCP para agentes de IA
+*Onde os agentes trabalham.* Em uso diário desde novembro de 2026, inclusive pelo ChatGPT no celular. Sete serviços Docker: OAuth com MFA e checagem JWT que falha fechada, um workspace sem credenciais, um gateway Git que guarda o token e recusa push na `main`, um proxy de saída e um log de auditoria encadeado por HMAC, ancorado num bucket travado contra alteração.
+<br>`MCP` `Python` `Node.js` `OAuth/JWT` `Docker Compose` `Cloudflare` · **81 testes do gateway · branch → push → PR pelo celular, PC desligado**
 <br>**[Estudo de caso](./projects/pt-br/mcp.md)**
 
-### Engenharia de software assistida por IA
-Fluxo de entrega em que agentes de IA planejam, implementam e testam mudanças pequenas e revisáveis. Critérios de aceite, CI e revisão humana controlam cada etapa.
-<br>`Agentes de código` `LLMs locais` `GitHub` `CI/CD`
-<br>**[Estudo de caso](./projects/pt-br/ai-engineering.md)**
+### 3 · A mesma disciplina, para um cliente
 
-### Federação Sergipana de Surf: plataforma web
-Plataforma web e fluxos administrativos para uma federação esportiva estadual, com controle de acesso por perfil e ambientes separados de homologação e produção.
-<br>`Aplicação web` `Controle de acesso` `Gestão de releases`
+#### Federação Sergipana de Surf: plataforma de atletas e competições (em desenvolvimento)
+Site público e plataforma do atleta para uma federação esportiva estadual, em desenvolvimento no ambiente de homologação: cadastro, filiações, inscrições em etapas, pagamentos por Pix e cartão com webhooks, ranking importado do LiveHeats e área administrativa.
+<br>`Next.js 16` `React 19` `TypeScript` `Supabase` `Mercado Pago` `Google Cloud Run` · **49 testes · 21 migrações SQL · lint e typecheck na CI**
 <br>**[Estudo de caso](./projects/pt-br/fss.md)**
+
+### Laboratório
+
+#### DevCore: protótipo de motor para tarefas de código com IA
+Um experimento de outubro de 2026: o modelo só propõe ações por ferramentas permitidas, um roteador escolhe a rota mais barata capaz de resolver (sem modelo, modelo local, modelo mais forte ou humano), e as verificações rodam num executor isolado antes de abrir um pull request. Não faz parte do fluxo de produção.
+<br>`Python` `Roteamento de LLMs` `Inferência local compatível com Ollama` `Docker` · **141 testes automatizados**
+<br>**[Notas](./projects/pt-br/devcore.md)**
 
 ## Tecnologias
 
 | Área | Tecnologias |
 | --- | --- |
-| **Linguagens** | TypeScript, JavaScript, SQL |
-| **Front-end** | React, Next.js, interfaces responsivas |
-| **Back-end e dados** | Node.js, Supabase (PostgreSQL, Auth), APIs REST, integrações com serviços externos |
-| **Engenharia de IA** | Model Context Protocol (MCP), agentes de código, inferência com LLMs locais, automação |
-| **Infraestrutura** | Linux, Docker, ambientes de desenvolvimento remotos, GitHub Actions, CircleCI |
-| **Práticas** | Revisão de pull requests, testes automatizados, staging → produção, acesso com privilégio mínimo |
+| **Linguagens** | TypeScript, Python, JavaScript, SQL |
+| **Front-end** | React 19, Next.js (App Router), Expo / React Native Web, PWA, interfaces responsivas |
+| **Back-end e dados** | Python (FastAPI), Node.js, Supabase (PostgreSQL, Auth, row-level security, migrações SQL), APIs REST, webhooks, Pix (BR Code, Mercado Pago), Google Calendar e CalDAV |
+| **Engenharia de IA** | Servidores Model Context Protocol (MCP), desenvolvimento com agentes de código (Claude, ChatGPT), segurança de agentes: isolamento de credenciais, ferramentas delimitadas, auditoria · *laboratório:* roteamento de modelos e LLMs locais |
+| **Segurança** | Verificação OAuth/JWT (RS256, falha fechada), isolamento de credenciais, inspeção de push Git, logs de auditoria encadeados por HMAC, privilégio mínimo |
+| **Infraestrutura** | Linux, Docker, Google Cloud Run e Cloud Build, Cloudflare, GitHub Actions, CircleCI |
+| **Práticas** | Revisão de pull requests, testes automatizados, staging → produção, migrações reversíveis |
 
 ## Exemplo público reproduzível
 
@@ -68,8 +79,6 @@ A maior parte do meu trabalho profissional está em repositórios privados. Os e
 
 ## Vamos conversar
 
-Estou aberto a oportunidades **CLT, PJ ou contrato internacional** em engenharia de software, desenvolvimento full-stack e engenharia de IA, remotas ou híbridas, no Brasil ou no exterior.
+Estou aberto a oportunidades **CLT, PJ ou contrato internacional** em desenvolvimento de software, desenvolvimento full-stack e engenharia de IA, remotas ou híbridas, no Brasil ou no exterior.
 
-<!-- Adicione aqui seus links de contato, por exemplo:
-[LinkedIn](https://www.linkedin.com/in/seu-usuario) · [E-mail](mailto:voce@exemplo.com)
--->
+**[Fale comigo no LinkedIn](https://www.linkedin.com/in/wesley-isaias)** · **E-mail:** [wesley_isaias@hotmail.com](mailto:wesley_isaias@hotmail.com) · **[Leia a história](https://wesley-isaias.github.io/wesley-isaias/)**

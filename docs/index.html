@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wesley Isaias · The Story</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Wesley Isaias, software developer: a healthcare SaaS, and the AI agent infrastructure that builds it safely.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: scrolling chapters on the left, a sticky system map on the right that lights the part each chapter describes; on phones the map sticks to the top. */
+:root {
+  --paper: #F2F5F4;
+  --surface: #FFFFFF;
+  --ink: #142321;
+  --muted: #50625F;
+  --line: #C9D5D2;
+  --accent: #0B6E66;
+  --accent-soft: #D3EBE7;
+  --gate: #A85A06;
+  --ok: #15803D;
+  --danger: #B42318;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --s-1: .8125rem; --s0: 1rem; --s1: 1.1875rem; --s2: 1.5rem; --s3: 2.125rem; --s4: clamp(2.375rem, 5.2vw, 4.25rem);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0D1615; --surface: #142120; --ink: #E4EEEC; --muted: #97ABA7; --line: #2B3D3A;
+    --accent: #5CC8BA; --accent-soft: #17312E; --gate: #F0A84A; --ok: #4ADE80; --danger: #F87171;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0D1615; --surface: #142120; --ink: #E4EEEC; --muted: #97ABA7; --line: #2B3D3A;
+  --accent: #5CC8BA; --accent-soft: #17312E; --gate: #F0A84A; --ok: #4ADE80; --danger: #F87171;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 400 var(--s0)/1.6 var(--f-body);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--accent); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 700; letter-spacing: -.015em; text-wrap: balance; margin: 0; }
+p { margin: 0; }
+
+/* language: both texts live in the page, one is shown */
+html[data-l="en"] .pt, html[data-l="pt"] .en { display: none !important; }
+
+.wrap {
+  max-width: 76rem;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+/* ---------- hero ---------- */
+.hero { padding-block: 1.25rem 3.5rem; border-bottom: 1px solid var(--line); }
+.topbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.mark { font: 500 var(--s-1)/1 var(--f-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 2px; background: var(--surface); }
+.lang button {
+  font: 500 var(--s-1)/1 var(--f-mono); letter-spacing: .04em; color: var(--muted);
+  background: transparent; border: 0; padding: .45rem .8rem; border-radius: 999px; cursor: pointer;
+}
+html[data-l="en"] .lang [data-set="en"], html[data-l="pt"] .lang [data-set="pt"] { background: var(--accent); color: var(--paper); }
+
+.hero-body { display: grid; gap: 1.5rem; padding-top: 3.5rem; max-width: 52rem; }
+.hero h1 { font-size: var(--s4); line-height: 1.04; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.lede { font-size: var(--s1); color: var(--muted); max-width: 40rem; }
+.who { font: 500 var(--s-1)/1.5 var(--f-mono); color: var(--muted); letter-spacing: .02em; }
+.who strong { color: var(--ink); font-weight: 500; }
+
+.ledger {
+  margin-top: 2.75rem;
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid var(--line);
+}
+.ledger div { padding: 1rem 1rem 0 0; display: grid; gap: .25rem; min-width: 0; }
+.ledger b { font: 700 var(--s3)/1 var(--f-display); font-variant-numeric: tabular-nums; }
+.ledger span { font-size: var(--s-1); color: var(--muted); }
+.ledger-note { margin-top: .9rem; font: 400 var(--s-1)/1.5 var(--f-mono); color: var(--muted); }
+
+/* ---------- story ---------- */
+.story { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 4rem; }
+.chapters { min-width: 0; }
+.chapter { padding-block: 16vh; display: grid; gap: 1.1rem; max-width: 36rem; }
+.chapter:first-child { padding-top: 10vh; }
+.chapter:last-child { padding-bottom: 22vh; }
+.eyebrow { font: 500 var(--s-1)/1 var(--f-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.chapter.is-risk .eyebrow { color: var(--danger); }
+.chapter h2 { font-size: var(--s3); line-height: 1.12; }
+.chapter p { color: var(--ink); }
+.chapter p.sub { color: var(--muted); }
+.chapter p.status { font: 400 var(--s-1)/1.55 var(--f-mono); color: var(--gate); border: 1px dashed var(--gate); border-radius: 6px; padding: .6rem .8rem; }
+.chapter p.status.live { color: var(--ok); border: 1px solid var(--ok); }
+.facts { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; }
+.facts li { display: grid; grid-template-columns: 1.1rem minmax(0, 1fr); gap: .5rem; }
+.facts li::before { content: ""; width: .5rem; height: .5rem; margin-top: .55rem; border-radius: 2px; background: var(--accent); }
+.chapter.is-risk .facts li::before { background: var(--danger); }
+.stack { display: flex; flex-wrap: wrap; gap: .4rem; }
+.stack span {
+  font: 500 .75rem/1 var(--f-mono); padding: .4rem .55rem; border-radius: 4px;
+  background: var(--accent-soft); color: var(--ink);
+}
+.receipt {
+  margin: .4rem 0 0; padding: .85rem 1rem; overflow-x: auto;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 6px;
+  font: 400 .8125rem/1.6 var(--f-mono); color: var(--muted); white-space: pre;
+}
+.receipt .ok { color: var(--ok); font-weight: 500; }
+.receipt .cmd { color: var(--ink); }
+.more { font-weight: 500; }
+
+/* ---------- system map ---------- */
+.figure {
+  position: sticky; top: 8vh; height: 84vh;
+  display: grid; align-content: center; gap: .75rem; min-width: 0;
+}
+.figure svg { width: 100%; height: auto; max-height: 76vh; display: block; }
+.legend { display: flex; flex-wrap: wrap; gap: .4rem 1rem; font: 400 .75rem/1.3 var(--f-mono); color: var(--muted); }
+.legend i { display: inline-block; width: .6rem; height: .6rem; border-radius: 2px; margin-right: .35rem; vertical-align: -1px; }
+
+.node rect { fill: var(--surface); stroke: var(--line); stroke-width: 1.2; transition: stroke .35s, fill .35s; }
+.node .t1 { font: 600 13px var(--f-body); fill: var(--ink); }
+.node .t2 { font: 400 10.5px var(--f-mono); fill: var(--muted); }
+.node.human rect { stroke-dasharray: 4 3; }
+.node, .edge { transition: opacity .35s; }
+.edge { fill: none; stroke: var(--line); stroke-width: 1.6; }
+.edge.flow { stroke: var(--accent); }
+.arrow { fill: var(--accent); }
+.zone { fill: none; stroke: var(--line); stroke-dasharray: 3 4; }
+.zone-label { font: 500 9.5px var(--f-mono); letter-spacing: .08em; fill: var(--muted); text-transform: uppercase; }
+.danger-path { stroke: var(--danger); stroke-width: 2; stroke-dasharray: 6 5; fill: none; opacity: 0; transition: opacity .35s; }
+.danger-x { fill: none; stroke: var(--danger); stroke-width: 2.4; opacity: 0; transition: opacity .35s; }
+
+.figure .dim { opacity: .22; }
+.figure .lit rect { stroke: var(--accent); stroke-width: 2; fill: var(--accent-soft); }
+.figure .lit.human rect { stroke: var(--gate); }
+.figure[data-step="risk"] .danger-path, .figure[data-step="risk"] .danger-x { opacity: 1; }
+.figure[data-step="risk"] .lit rect { stroke: var(--danger); fill: var(--surface); }
+
+/* ---------- close ---------- */
+.close { border-top: 1px solid var(--line); padding-block: 4rem 5rem; }
+.close-grid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 3rem; }
+.close h2 { font-size: var(--s3); line-height: 1.12; margin-bottom: 1.25rem; }
+.principles { display: grid; gap: 1rem; margin: 0; padding: 0; list-style: none; }
+.principles b { display: block; font-family: var(--f-display); font-size: var(--s1); }
+.principles span { color: var(--muted); }
+.links { display: grid; gap: .6rem; align-content: start; }
+.links a {
+  display: flex; justify-content: space-between; gap: 1rem; padding: .9rem 1rem;
+  border: 1px solid var(--line); border-radius: 6px; background: var(--surface);
+  color: var(--ink); text-decoration: none; font-weight: 500;
+}
+.links a:hover { border-color: var(--accent); }
+.links a small { font: 400 .75rem/1.6 var(--f-mono); color: var(--muted); }
+.foot { margin-top: 3rem; font: 400 .75rem/1.6 var(--f-mono); color: var(--muted); }
+
+/* ---------- narrow screens: map sticks to the top ---------- */
+@media (max-width: 880px) {
+  .story { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .figure {
+    order: -1; top: env(safe-area-inset-top, 0px); height: auto; z-index: 5;
+    background: var(--paper); border-bottom: 1px solid var(--line);
+    padding-block: .6rem .5rem; margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+    padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+  .figure svg { max-height: 40vh; }
+  .legend { display: none; }
+  .chapter, .chapter:first-child { padding-block: 9vh; }
+  .chapter:last-child { padding-bottom: 14vh; }
+  .ledger { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .close-grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .node, .edge, .node rect, .danger-path, .danger-x { transition: none; }
+}
+</style>
+</head>
+<body>
+<script>
+  (function () {
+    var l = "en";
+    try { l = localStorage.getItem("story-lang") || ""; } catch (e) { l = ""; }
+    if (l !== "en" && l !== "pt") l = /^pt/i.test(navigator.language || "") ? "pt" : "en";
+    document.documentElement.dataset.l = l;
+    document.documentElement.lang = l === "pt" ? "pt-BR" : "en";
+  })();
+</script>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="topbar">
+      <span class="mark">wesley-isaias · <span class="en">the story</span><span class="pt">a história</span></span>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" id="lang-en" data-set="en">EN</button>
+        <button type="button" id="lang-pt" data-set="pt">PT</button>
+      </div>
+    </div>
+    <div class="hero-body">
+      <h1>
+        <span class="en">I build a healthcare product with AI agents, <em>and the guardrails that keep it safe.</em></span>
+        <span class="pt">Construo um produto de saúde com agentes de IA, <em>e os controles que mantêm tudo seguro.</em></span>
+      </h1>
+      <p class="lede">
+        <span class="en">Zayuni is the product I founded, used by real practitioners. I develop it with AI agents inside a strict delivery process, and I design the infrastructure that keeps it safe: where agents work, what they can reach, and how every change is checked before it reaches production.</span>
+        <span class="pt">O Zayuni é o produto que fundei, usado por profissionais reais. Desenvolvo-o com agentes de IA dentro de um processo de entrega rígido, e desenho a infraestrutura que mantém tudo seguro: onde os agentes trabalham, o que podem acessar e como cada mudança é verificada antes de chegar à produção.</span>
+      </p>
+      <p class="who"><strong>Wesley Isaias</strong> · <span class="en">Software Developer · Full-stack & AI engineering · Brazil (UTC−3) · open to remote roles</span><span class="pt">Desenvolvedor de Software · Full-stack e engenharia de IA · Brasil (UTC−3) · aberto a vagas remotas</span></p>
+    </div>
+    <div class="ledger">
+      <div><b>555</b><span class="en">automated tests passing</span><span class="pt">testes automatizados passando</span></div>
+      <div><b>3</b><span class="en">projects in this story</span><span class="pt">projetos nesta história</span></div>
+      <div><b>72</b><span class="en">versioned SQL migrations</span><span class="pt">migrações SQL versionadas</span></div>
+      <div><b>442</b><span class="en">commits on Zayuni since Sep 2026</span><span class="pt">commits no Zayuni desde set/2026</span></div>
+    </div>
+    <p class="ledger-note"><span class="en">555 = Zayuni backend 425 + Zayuni DevWS Git gateway 81 + FSS 49. Local runs on 20 Nov 2026; subtests and the DevCore lab prototype not counted.</span><span class="pt">555 = backend do Zayuni 425 + gateway Git do Zayuni DevWS 81 + FSS 49. Execuções locais em 20/11/2026, sem contar subtestes nem o protótipo DevCore.</span></p>
+  </div>
+</header>
+
+<main class="wrap story">
+  <div class="chapters">
+
+    <section class="chapter" data-step="product" id="product">
+      <p class="eyebrow"><span class="en">The product</span><span class="pt">O produto</span></p>
+      <h2><span class="en">Zayuni runs the day of a practice.</span><span class="pt">O Zayuni organiza o dia de um consultório.</span></h2>
+      <p class="sub"><span class="en">Independent health professionals often manage appointments in a notebook, patients in a spreadsheet and payments over WhatsApp. Zayuni puts scheduling, patient records, care history and finances in one app that works on phone, tablet and desktop.</span><span class="pt">Profissionais de saúde autônomos costumam controlar a agenda num caderno, os pacientes numa planilha e os pagamentos pelo WhatsApp. O Zayuni reúne agenda, pacientes, histórico de atendimentos e financeiro num app que funciona no celular, no tablet e no computador.</span></p>
+      <ul class="facts">
+        <li><span class="en">Every row is scoped to its account with PostgreSQL row-level security.</span><span class="pt">Cada registro fica restrito à sua conta por row-level security no PostgreSQL.</span></li>
+        <li><span class="en">Appointments sync to Google Calendar and iCloud (CalDAV), with provider credentials encrypted at rest.</span><span class="pt">Agendamentos sincronizados com Google Calendar e iCloud (CalDAV), com credenciais dos provedores criptografadas.</span></li>
+        <li><span class="en">Pix charges generated as BR Codes, and payment receipts read by OCR <b>on the device</b>. The receipt never leaves the phone.</span><span class="pt">Cobranças Pix geradas como BR Code, e comprovantes lidos por OCR <b>no próprio aparelho</b>. O comprovante nunca sai do celular.</span></li>
+        <li><span class="en">Merging to main deploys to staging. Production is a separate, explicit promotion.</span><span class="pt">Merge na main publica em staging. Produção é uma promoção separada e explícita.</span></li>
+      </ul>
+      <div class="stack"><span>Expo · React Native Web</span><span>PWA</span><span>Python · FastAPI</span><span>Supabase · PostgreSQL · RLS</span><span>Cloud Run</span><span>Secret Manager</span></div>
+<pre class="receipt"><span class="cmd">$ pytest backend/tests</span>
+<span class="ok">425 passed</span>, 83 skipped, 63 subtests passed
+<span class="cmd">$ git rev-list --count HEAD</span>
+442  <span class="en"># since Sep 2026</span><span class="pt"># desde set/2026</span></pre>
+      <a class="more" href="https://github.com/wesley-isaias/wesley-isaias/blob/main/projects/zayuni.md"><span class="en">Zayuni case study →</span><span class="pt">Estudo de caso do Zayuni →</span></a>
+    </section>
+
+    <section class="chapter is-risk" data-step="risk" id="risk">
+      <p class="eyebrow"><span class="en">The risk</span><span class="pt">O risco</span></p>
+      <h2><span class="en">An agent with a shell and a token is a liability.</span><span class="pt">Um agente com shell e token é um risco.</span></h2>
+      <p class="sub"><span class="en">AI agents let a small team move fast. The usual setup gives them a terminal and a GitHub token in the same box. With health data involved, that is not acceptable.</span><span class="pt">Agentes de IA permitem que uma equipe pequena avance rápido. A configuração comum dá a eles um terminal e um token do GitHub no mesmo ambiente. Com dados de saúde envolvidos, isso não é aceitável.</span></p>
+      <ul class="facts">
+        <li><span class="en">A prompt injection can leak the token or push anywhere, including <code>main</code>.</span><span class="pt">Um prompt injection pode vazar o token ou fazer push em qualquer lugar, inclusive na <code>main</code>.</span></li>
+        <li><span class="en">The model can report "tests pass" without running anything.</span><span class="pt">O modelo pode dizer que "os testes passam" sem rodar nada.</span></li>
+        <li><span class="en">Sending every task to the most expensive model burns money on work that needs no model.</span><span class="pt">Mandar toda tarefa para o modelo mais caro gasta dinheiro em trabalho que nem precisa de modelo.</span></li>
+      </ul>
+      <p><span class="en">So I built the infrastructure that takes away what agents should never hold, and every change follows the same path to production.</span><span class="pt">Por isso construí a infraestrutura que tira dos agentes o que eles nunca deveriam ter, e toda mudança segue o mesmo caminho até a produção.</span></p>
+    </section>
+
+    <section class="chapter" data-step="workspace" id="workspace">
+      <p class="eyebrow"><span class="en">Where agents work · Zayuni DevWS</span><span class="pt">Onde os agentes trabalham · Zayuni DevWS</span></p>
+      <h2><span class="en">A workspace with nothing to steal.</span><span class="pt">Um workspace sem nada a roubar.</span></h2>
+      <p class="status live"><span class="en">In daily use since November 2026. Milestone: from ChatGPT on my phone, with my computer off, an agent created a branch, pushed and opened a pull request.</span><span class="pt">Em uso diário desde novembro de 2026. Marco: pelo ChatGPT no celular, com o computador desligado, um agente criou um branch, fez push e abriu um pull request.</span></p>
+      <p class="sub"><span class="en">I built my own MCP server: seven Docker services on a VPS. ChatGPT and Claude connect through the Model Context Protocol to an isolated development container. The container is treated as already compromised, so it holds no credentials and cannot reach the server's internal network.</span><span class="pt">Construí meu próprio servidor MCP: sete serviços Docker numa VPS. O ChatGPT e o Claude se conectam pelo Model Context Protocol a um contêiner de desenvolvimento isolado. O contêiner é tratado como já comprometido: não guarda credenciais e não alcança a rede interna do servidor.</span></p>
+      <ul class="facts">
+        <li><span class="en">Cloudflare Access Managed OAuth signs me in, with TOTP MFA. The origin verifies the JWT on every <code>/mcp</code> request: RS256 only, exact issuer and audience, at most 60 s of clock skew.</span><span class="pt">O login é feito pelo Cloudflare Access Managed OAuth, com MFA por TOTP. A origem verifica o JWT em toda requisição <code>/mcp</code>: apenas RS256, issuer e audience exatos, no máximo 60 s de diferença de relógio.</span></li>
+        <li><span class="en">When keys are unavailable, the verifier refuses. It fails closed.</span><span class="pt">Se as chaves não estiverem disponíveis, o verificador recusa. Ele falha fechado.</span></li>
+        <li><span class="en">Cookies, <code>Authorization</code> and <code>Cf-Access-*</code> headers are stripped before anything reaches the workspace.</span><span class="pt">Cookies e cabeçalhos <code>Authorization</code> e <code>Cf-Access-*</code> são removidos antes de chegar ao workspace.</span></li>
+      </ul>
+      <div class="stack"><span>MCP</span><span>Docker Compose · 7 services</span><span>Node.js 22 · node:crypto</span><span>Cloudflare Access · Tunnel</span><span>systemd · watchdog</span></div>
+    </section>
+
+    <section class="chapter" data-step="gateway" id="gateway">
+      <p class="eyebrow"><span class="en">What leaves the box</span><span class="pt">O que sai do ambiente</span></p>
+      <h2><span class="en">Every push is inspected. Every action is on the record.</span><span class="pt">Todo push é inspecionado. Toda ação fica registrada.</span></h2>
+      <p class="sub"><span class="en">The only route to GitHub is a Git gateway I wrote with the Python standard library only. The GitHub token lives there and nowhere else, and only three repositories are allowed.</span><span class="pt">O único caminho até o GitHub é um gateway Git que escrevi só com a biblioteca padrão do Python. O token do GitHub fica ali e em nenhum outro lugar, e só três repositórios são permitidos.</span></p>
+      <ul class="facts">
+        <li><span class="en">Each pushed pack is indexed in quarantine with <code>git index-pack --strict</code> and checked for fast-forward. Pushes to <code>main</code> and changes under <code>.github/</code> are refused, and so is merge.</span><span class="pt">Cada pacote enviado é indexado em quarentena com <code>git index-pack --strict</code> e verificado como fast-forward. Push na <code>main</code> e mudanças em <code>.github/</code> são recusados, assim como merge.</span></li>
+        <li><span class="en">The audit log stores a closed, content-free schema, chained with HMAC, and exports checkpoints to a write-locked R2 bucket. The kernel verifies each producer's identity (<code>SO_PEERCRED</code>).</span><span class="pt">O log de auditoria guarda um esquema fechado e sem conteúdo, encadeado por HMAC, e exporta checkpoints para um bucket R2 travado contra alteração. O kernel verifica a identidade de cada produtor (<code>SO_PEERCRED</code>).</span></li>
+        <li><span class="en">If the audit log does not acknowledge an event, the action does not happen.</span><span class="pt">Se o log de auditoria não confirmar o evento, a ação não acontece.</span></li>
+      </ul>
+<pre class="receipt"><span class="cmd">$ pytest deploy/dev-access/git-gateway/tests</span>
+<span class="ok">81 passed</span>, 176 subtests passed</pre>
+      <a class="more" href="https://github.com/wesley-isaias/wesley-isaias/blob/main/projects/mcp.md"><span class="en">Zayuni DevWS case study →</span><span class="pt">Estudo de caso do Zayuni DevWS →</span></a>
+    </section>
+
+    <section class="chapter" data-step="ship" id="ship">
+      <p class="eyebrow"><span class="en">How every change ships</span><span class="pt">Como cada mudança é entregue</span></p>
+      <h2><span class="en">Agents propose. Tests, review and a person decide.</span><span class="pt">Agentes propõem. Testes, revisão e uma pessoa decidem.</span></h2>
+      <p class="sub"><span class="en">I write the code with Claude, ChatGPT and other coding agents. What makes that safe is the path every change takes, whoever wrote it.</span><span class="pt">Escrevo o código com Claude, ChatGPT e outros agentes de código. O que torna isso seguro é o caminho que toda mudança percorre, não importa quem a escreveu.</span></p>
+      <ul class="facts">
+        <li><span class="en">Work starts from an approved issue, on its own branch. Nothing is developed on <code>main</code>.</span><span class="pt">O trabalho começa de uma issue aprovada, em branch próprio. Nada é desenvolvido na <code>main</code>.</span></li>
+        <li><span class="en">CI runs lint, type checks, the web build and the backend suite. Dedicated regression workflows guard agenda time zones, finance receipts and patient search.</span><span class="pt">A CI roda lint, checagem de tipos, build web e a suíte do backend. Workflows de regressão dedicados protegem fuso horário da agenda, comprovantes do financeiro e busca de pacientes.</span></li>
+        <li><span class="en">Merging deploys to staging. Production is a separate promotion that I approve explicitly.</span><span class="pt">O merge publica em staging. Produção é uma promoção separada, que eu aprovo explicitamente.</span></li>
+        <li><span class="en">Migrations must be additive and backward compatible, because production holds real data.</span><span class="pt">Migrações precisam ser aditivas e compatíveis com a versão anterior, porque a produção tem dados reais.</span></li>
+      </ul>
+      <p class="sub"><span class="en">Lab: I also prototyped <a href="https://github.com/wesley-isaias/wesley-isaias/blob/main/projects/devcore.md">DevCore</a>, an engine that routes coding tasks between local models, stronger models and people, and validates each change in an isolated runner (141 tests). It is an experiment, not part of the production workflow.</span><span class="pt">Laboratório: também prototipei o <a href="https://github.com/wesley-isaias/wesley-isaias/blob/main/projects/pt-br/devcore.md">DevCore</a>, um motor que roteia tarefas de código entre modelos locais, modelos mais fortes e pessoas, e valida cada mudança num executor isolado (141 testes). É um experimento, não faz parte do fluxo de produção.</span></p>
+    </section>
+
+    <section class="chapter" data-step="client" id="client">
+      <p class="eyebrow"><span class="en">Same discipline, for a client</span><span class="pt">A mesma disciplina, para um cliente</span></p>
+      <h2><span class="en">A state surf federation is going digital.</span><span class="pt">Uma federação estadual de surf a caminho do digital.</span></h2>
+      <p class="sub"><span class="en">For the Sergipe Surf Federation I am building the public site and the athlete platform, now in development on staging: registration, memberships, event entries, rankings imported from LiveHeats, and an admin area.</span><span class="pt">Para a Federação Sergipana de Surf estou construindo o site público e a plataforma do atleta, em desenvolvimento no ambiente de homologação: cadastro, filiação, inscrições em etapas, ranking importado do LiveHeats e área administrativa.</span></p>
+      <ul class="facts">
+        <li><span class="en">Pix and card payments through Mercado Pago, confirmed by webhook. The return page ignores URL parameters and asks the payment API directly.</span><span class="pt">Pagamentos por Pix e cartão via Mercado Pago, confirmados por webhook. A página de retorno ignora os parâmetros da URL e consulta a API de pagamentos.</span></li>
+        <li><span class="en">Docker image built by Cloud Build and deployed to Cloud Run by image digest.</span><span class="pt">Imagem Docker gerada pelo Cloud Build e publicada no Cloud Run pelo digest.</span></li>
+      </ul>
+      <div class="stack"><span>Next.js 16</span><span>React 19</span><span>TypeScript</span><span>Supabase</span><span>Mercado Pago</span><span>Cloud Run</span></div>
+<pre class="receipt"><span class="cmd">$ npm run typecheck && npm run lint && npm test</span>
+<span class="ok">tsc ✓  eslint ✓  # pass 49  # fail 0</span></pre>
+      <a class="more" href="https://github.com/wesley-isaias/wesley-isaias/blob/main/projects/fss.md"><span class="en">FSS case study →</span><span class="pt">Estudo de caso da FSS →</span></a>
+    </section>
+
+  </div>
+
+  <aside class="figure" id="figure" data-step="all" aria-label="System map">
+    <svg viewBox="0 0 400 560" role="img" aria-labelledby="map-title">
+      <title id="map-title">System map: AI agents reach a credential-free workspace through a JWT verifier; pushes go through an inspecting Git gateway to GitHub; CI and human review gate every change; staging comes before a human-approved production deploy.</title>
+      <defs>
+        <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path class="arrow" d="M0,0 L8,4 L0,8 z"/>
+        </marker>
+      </defs>
+
+      <rect class="zone" x="8" y="166" width="384" height="176" rx="10"/>
+      <text class="zone-label" x="214" y="336">isolated · no credentials</text>
+
+      <!-- edges -->
+      <path class="edge flow" data-a="agents" data-b="verifier" d="M105,72 V102" marker-end="url(#ah)"/>
+      <path class="edge flow" data-a="verifier" data-b="workspace" d="M105,154 V196" marker-end="url(#ah)"/>
+      <path class="edge flow" data-a="github" data-b="review" d="M190,376 H210" marker-end="url(#ah)"/>
+      <path class="edge flow" data-a="workspace" data-b="gateway" d="M105,248 V268" marker-end="url(#ah)"/>
+      <path class="edge" data-a="gateway" data-b="audit" d="M190,294 H210" marker-end="url(#ah)"/>
+      <path class="edge" data-a="verifier" data-b="audit" d="M190,128 C 330,128 330,200 300,268" marker-end="url(#ah)"/>
+      <path class="edge flow" data-a="gateway" data-b="github" d="M105,320 V350" marker-end="url(#ah)"/>
+      <path class="edge flow" data-a="github" data-b="staging" d="M105,402 V432" marker-end="url(#ah)"/>
+      <path class="edge flow" data-a="staging" data-b="production" d="M190,458 H210" marker-end="url(#ah)"/>
+      <path class="edge flow" data-a="production" data-b="product" d="M300,484 V500" marker-end="url(#ah)"/>
+
+      <!-- the unsafe shortcut, shown in the risk chapter -->
+      <path class="danger-path" d="M20,60 C 4,160 4,300 20,372"/>
+      <path class="danger-x" d="M3,206 L15,218 M15,206 L3,218"/>
+
+      <!-- nodes -->
+      <g class="node" data-id="agents"><rect x="20" y="20" width="170" height="52" rx="8"/><text class="t1" x="34" y="42">ChatGPT · Claude</text><text class="t2" x="34" y="60">AI agents</text></g>
+      <g class="node" data-id="verifier"><rect x="20" y="102" width="170" height="52" rx="8"/><text class="t1" x="34" y="124">JWT verifier</text><text class="t2" x="34" y="142">OAuth · fail-closed</text></g>
+      <g class="node" data-id="workspace"><rect x="20" y="196" width="170" height="52" rx="8"/><text class="t1" x="34" y="218">Zayuni DevWS</text><text class="t2" x="34" y="236">MCP · isolated</text></g>
+      <g class="node human" data-id="review"><rect x="210" y="350" width="170" height="52" rx="8"/><text class="t1" x="224" y="372">CI · review</text><text class="t2" x="224" y="390">tests · human approval</text></g>
+      <g class="node" data-id="gateway"><rect x="20" y="268" width="170" height="52" rx="8"/><text class="t1" x="34" y="290">Git gateway</text><text class="t2" x="34" y="308">token · push inspection</text></g>
+      <g class="node" data-id="audit"><rect x="210" y="268" width="170" height="52" rx="8"/><text class="t1" x="224" y="290">Audit log</text><text class="t2" x="224" y="308">HMAC chain · ACK</text></g>
+      <g class="node" data-id="github"><rect x="20" y="350" width="170" height="52" rx="8"/><text class="t1" x="34" y="372">GitHub</text><text class="t2" x="34" y="390">one reviewable PR</text></g>
+      <g class="node" data-id="staging"><rect x="20" y="432" width="170" height="52" rx="8"/><text class="t1" x="34" y="454">Staging</text><text class="t2" x="34" y="472">CI · validation</text></g>
+      <g class="node human" data-id="production"><rect x="210" y="432" width="170" height="52" rx="8"/><text class="t1" x="224" y="454">Production</text><text class="t2" x="224" y="472">human promotion</text></g>
+      <g class="node" data-id="product"><rect x="210" y="500" width="170" height="52" rx="8"/><text class="t1" x="224" y="522">Zayuni</text><text class="t2" x="224" y="540">end users</text></g>
+    </svg>
+    <div class="legend">
+      <span><i style="background: var(--accent)"></i><span class="en">path of a change</span><span class="pt">caminho de uma mudança</span></span>
+      <span><i style="border: 1.5px dashed var(--gate)"></i><span class="en">human decision</span><span class="pt">decisão humana</span></span>
+    </div>
+  </aside>
+</main>
+
+<footer class="close">
+  <div class="wrap close-grid">
+    <div>
+      <h2><span class="en">What I bring to a team</span><span class="pt">O que levo para um time</span></h2>
+      <ul class="principles">
+        <li><b><span class="en">Product and infrastructure together</span><span class="pt">Produto e infraestrutura juntos</span></b><span class="en">I can ship user-facing features and design the systems underneath them.</span><span class="pt">Entrego funcionalidades para o usuário e desenho os sistemas por baixo delas.</span></li>
+        <li><b><span class="en">AI with accountability</span><span class="pt">IA com responsabilidade</span></b><span class="en">Agents speed up delivery. Tests, review and a human on every production decision keep it correct.</span><span class="pt">Agentes aceleram a entrega. Testes, revisão e uma pessoa em cada decisão de produção garantem a correção.</span></li>
+        <li><b><span class="en">Security by default</span><span class="pt">Segurança por padrão</span></b><span class="en">Least privilege, credentials outside the blast radius, fail closed.</span><span class="pt">Privilégio mínimo, credenciais fora do raio de impacto, falha fechada.</span></li>
+        <li><b><span class="en">Data is never collateral</span><span class="pt">Dado nunca é efeito colateral</span></b><span class="en">Reversible migrations, tenant isolation, staging before production.</span><span class="pt">Migrações reversíveis, isolamento por conta, staging antes da produção.</span></li>
+      </ul>
+    </div>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/wesley-isaias"><span class="en">Connect on LinkedIn</span><span class="pt">Fale comigo no LinkedIn</span><small>in/wesley-isaias</small></a>
+      <a href="mailto:wesley_isaias@hotmail.com"><span>E-mail</span><small>wesley_isaias@hotmail.com</small></a>
+      <a href="https://github.com/wesley-isaias"><span>GitHub</span><small>github.com/wesley-isaias</small></a>
+      <a href="https://github.com/wesley-isaias/wesley-isaias#featured-work"><span class="en">All case studies</span><span class="pt">Todos os estudos de caso</span><small>README</small></a>
+      <a href="https://github.com/wesley-isaias/wesley-isaias/tree/main/examples/agent-policy"><span class="en">Public code example</span><span class="pt">Exemplo de código público</span><small>Python · CI</small></a>
+      <a href="https://app.zayuni.com"><span>Zayuni</span><small>app.zayuni.com</small></a>
+    </div>
+  </div>
+  <div class="wrap">
+    <p class="foot"><span class="en">Most of this work lives in private repositories. I'm glad to walk through the code in a technical interview.</span><span class="pt">A maior parte deste trabalho está em repositórios privados. Apresento o código com prazer em uma entrevista técnica.</span></p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+  document.querySelectorAll(".lang button").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var l = b.getAttribute("data-set");
+      root.dataset.l = l;
+      root.lang = l === "pt" ? "pt-BR" : "en";
+      try { localStorage.setItem("story-lang", l); } catch (e) {}
+    });
+  });
+
+  var fig = document.getElementById("figure");
+  var steps = {
+    all: null,
+    product: ["product", "production", "staging"],
+    risk: ["agents", "github", "production"],
+    workspace: ["agents", "verifier", "workspace"],
+    gateway: ["workspace", "gateway", "audit", "github"],
+    ship: ["github", "review", "staging", "production"],
+    client: ["github", "review", "staging"]
+  };
+  var nodes = fig.querySelectorAll(".node");
+  var edges = fig.querySelectorAll(".edge");
+
+  function show(step) {
+    var on = steps[step] || null;
+    fig.dataset.step = step;
+    nodes.forEach(function (n) {
+      var id = n.getAttribute("data-id");
+      var lit = on && on.indexOf(id) > -1;
+      n.classList.toggle("lit", !!lit);
+      n.classList.toggle("dim", !!on && !lit);
+    });
+    edges.forEach(function (e) {
+      var both = on && on.indexOf(e.getAttribute("data-a")) > -1 && on.indexOf(e.getAttribute("data-b")) > -1;
+      e.classList.toggle("dim", !!on && !both);
+    });
+  }
+
+  if (!("IntersectionObserver" in window)) return;
+  var chapters = document.querySelectorAll(".chapter");
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) show(en.target.getAttribute("data-step"));
+    });
+  }, { rootMargin: "-45% 0px -45% 0px" });
+  chapters.forEach(function (c) { io.observe(c); });
+
+  var hero = document.querySelector(".hero");
+  var io2 = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) show("all");
+  }, { threshold: 0.35 });
+  io2.observe(hero);
+  var close = document.querySelector(".close");
+  new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) show("all");
+  }, { threshold: 0.2 }).observe(close);
+})();
+</script>
+</body>
+</html>
