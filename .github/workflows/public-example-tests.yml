@@ -1,0 +1,27 @@
+name: Public example tests
+
+on:
+  push:
+    paths:
+      - "examples/agent-policy/**"
+      - ".github/workflows/public-example-tests.yml"
+  pull_request:
+    paths:
+      - "examples/agent-policy/**"
+      - ".github/workflows/public-example-tests.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run public example tests
+        working-directory: examples/agent-policy
+        run: python -m unittest discover -v
