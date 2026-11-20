@@ -1,39 +1,69 @@
+<div align="center">
+
 # Wesley Isaias
-### Desenvolvedor de Software · Produtos Digitais · Inteligência Artificial · MCP
 
-Desenvolvo produtos digitais e ferramentas que integram **engenharia de software, automação e inteligência artificial**. Trabalho da definição de requisitos à implementação e validação, com atenção à segurança, experiência do usuário e preservação de dados.
+**Software Engineer · Full-Stack Web · AI Engineering & MCP**
 
-📍 Brasil · Interesse em oportunidades remotas de desenvolvimento de software e IA
+Brazil (UTC−3) · Open to remote roles in Brazil and internationally
+
+[Featured work](#featured-work) · [Tech stack](#tech-stack) · [Zayuni](https://app.zayuni.com) · [🇧🇷 Versão em português](./README.pt-BR.md)
+
+</div>
 
 ---
 
-## Projetos em destaque
+I build web products and developer tooling where software engineering meets AI. I'm currently developing **Zayuni**, a SaaS platform for healthcare professionals, and an **MCP-based workspace** that lets AI agents work on development environments under explicit, scoped permissions.
 
-| Projeto | O que estou construindo | Estudo de caso |
-| --- | --- | --- |
-| **Zayuni** | Plataforma SaaS para profissionais de saúde: agenda, pacientes, atendimentos e gestão financeira | [Conhecer](./projects/zayuni.md) |
-| **Zayuni Dev Workspace MCP** | Integrações e ferramentas para agentes de IA atuarem em ambientes de desenvolvimento autorizados | [Conhecer](./projects/mcp.md) |
-| **Engenharia com IA** | Fluxos com agentes, modelos locais, automação, testes e revisão de software | [Conhecer](./projects/ai-engineering.md) |
-| **Federação Sergipana de Surf** | Plataforma web e fluxos administrativos para entidade esportiva | [Conhecer](./projects/fss.md) |
+I work end to end: requirements, data modeling, UI, integrations, testing and controlled releases. Data integrity, security and privacy are core requirements in all of it.
 
-## Competências aplicadas
+## Featured work
 
-- **Desenvolvimento:** aplicações web, interfaces responsivas, APIs, integrações e persistência de dados
-- **Inteligência artificial:** agentes, modelos locais, integração de ferramentas e automação de tarefas
-- **Infraestrutura:** MCP, Linux, Docker, ambientes remotos e controles de acesso
-- **Qualidade:** Git/GitHub, revisão de PRs, testes automatizados, staging e validação incremental
-- **Engenharia responsável:** privacidade, isolamento de dados, segurança e mudanças reversíveis
+### Zayuni: SaaS for healthcare professionals
+Scheduling, patient records, appointments and financial management for independent practitioners, built for phone, tablet and desktop.
+<br>`Supabase` `PostgreSQL` `Responsive web` `Staging → production`
+<br>**[Case study](./projects/zayuni.md)** · **[Product](https://app.zayuni.com)**
 
-## Meu processo
+### Zayuni Dev Workspace: MCP tooling for AI agents
+A Model Context Protocol (MCP) integration that gives AI agents access to development tools on remote Linux environments. Permissions are scoped, and sensitive operations need human approval.
+<br>`MCP` `AI agents` `Linux` `Docker`
+<br>**[Case study](./projects/mcp.md)**
 
-`Objetivo → Escopo → Implementação → Testes → Revisão → Homologação → Entrega`
+### AI-assisted software engineering
+A delivery workflow in which AI coding agents plan, implement and test small, reviewable changes. Acceptance criteria, CI and human review gate every step.
+<br>`AI coding agents` `Local LLMs` `GitHub` `CI/CD`
+<br>**[Case study](./projects/ai-engineering.md)**
 
-Uso IA para ampliar a capacidade de desenvolvimento, mas mantenho critérios de aceite, verificação técnica e controle humano sobre operações sensíveis.
+### Sergipe Surf Federation: web platform
+A web platform and administrative workflows for a state sports federation, with role-based access and separate staging and production environments.
+<br>`Web application` `Access control` `Release management`
+<br>**[Case study](./projects/fss.md)**
 
-## Para avaliadores
+## Tech stack
 
-Os projetos comerciais e de infraestrutura são **privados**. Os estudos de caso públicos documentam objetivos, decisões de engenharia e desafios sem expor código proprietário, credenciais ou dados de clientes. Os repositórios públicos de estudo representam etapas de aprendizado, não substituem as experiências descritas aqui.
+| Area | Technologies |
+| --- | --- |
+| **Languages** | TypeScript, JavaScript, SQL |
+| **Front-end** | React, Next.js, responsive interfaces |
+| **Back-end & data** | Node.js, Supabase (PostgreSQL, Auth), REST APIs, third-party integrations |
+| **AI engineering** | Model Context Protocol (MCP), AI coding agents, local LLM inference, automation |
+| **Infrastructure** | Linux, Docker, remote development environments, GitHub Actions, CircleCI |
+| **Practices** | Pull-request review, automated testing, staging → production releases, least-privilege access |
 
-**[Portfólio detalhado](./PORTFOLIO.md)** · **[Zayuni](https://app.zayuni.com)**
+## How I work
 
-<sub>Atualizado em novembro de 2026. Demonstrações e funcionalidades podem depender de autenticação e do estágio atual de desenvolvimento.</sub>
+- **Small, verifiable changes:** each change has a clear scope, acceptance criteria and tests before it goes to review.
+- **Data integrity first:** releases and migrations are planned to be reversible, and user data stays isolated per account.
+- **Secure by default:** least privilege, no secrets in code, and explicit approval for destructive operations.
+- **AI with accountability:** agents speed up delivery, while people keep ownership of review, release and production.
+
+## About code access
+
+Most of my professional work is in private repositories. The case studies above cover the problems, architecture and engineering decisions without exposing proprietary code or client data. I'm glad to walk through code and design choices in technical interviews.
+
+## Let's talk
+
+I'm open to **full-time or contract** roles in software engineering, full-stack development and AI engineering, remote or hybrid, in Brazil or internationally.
+
+<!-- Add your contact links here, e.g.:
+[LinkedIn](https://www.linkedin.com/in/your-handle) · [Email](mailto:you@example.com)
+-->

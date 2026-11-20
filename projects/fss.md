@@ -1,19 +1,27 @@
-# Federação Sergipana de Surf — plataforma digital
+# Sergipe Surf Federation: web platform
 
-[← Voltar ao perfil](../README.md)
+[← Back to profile](../README.md) · [🇧🇷 Português](./pt-br/fss.md)
 
-## Contexto
-Projeto de desenvolvimento de plataforma web para uma entidade esportiva, com recursos administrativos e gestão digital.
+| | |
+| --- | --- |
+| **Client** | Federação Sergipana de Surf (state surfing federation, Brazil) |
+| **Role** | Developer: web application, back-end integration and releases |
+| **Status** | In development (private repository) |
 
-## Desafios de engenharia
-- Interface web e fluxos de acesso;
-- Integração entre aplicação e backend;
-- Separação de staging e produção;
-- Controle de permissões;
-- Implantação gradual e validação de mudanças.
+## Context
 
-## Práticas de entrega
-Alterações controladas, ambientes separados, revisão de configurações e proteção dos dados institucionais.
+A state sports federation needed a digital presence and administrative tools to manage its operations, which had previously been handled manually.
 
-## Limites
-Código-fonte comercial privado. Não são divulgados dados da federação, credenciais, detalhes de infraestrutura ou informações de usuários. O texto não afirma que todos os módulos estão concluídos.
+## Scope
+
+- Public website and authenticated areas
+- Administrative workflows for the federation's team
+- Integration between the web application and the back-end
+- Role-based permissions for different user profiles
+
+## Engineering practices
+
+- **Separate environments:** staging and production are isolated, and changes are validated before release.
+- **Access control:** permissions are defined per role, following least privilege.
+- **Gradual rollout:** features are released step by step, with configuration reviewed at each stage.
+- **Data protection:** institutional and member data is never exposed in public material.

@@ -1,42 +1,52 @@
-# Zayuni — SaaS para profissionais de saúde
+# Zayuni: SaaS for healthcare professionals
 
-[← Voltar ao perfil](../README.md)
+[← Back to profile](../README.md) · [🇧🇷 Português](./pt-br/zayuni.md)
 
-## Contexto
-Produto digital em desenvolvimento para organizar a rotina de profissionais de saúde, incluindo agenda, pacientes, serviços, atendimentos e gestão financeira.
+| | |
+| --- | --- |
+| **Role** | Product development: architecture, front-end, data and releases |
+| **Status** | In active development · [app.zayuni.com](https://app.zayuni.com) (sign-in required) |
+| **Stack** | Responsive web app · Supabase (PostgreSQL, Auth) · Git/GitHub with staging and production |
 
-## Meu trabalho
-- Estruturação e evolução de fluxos de produto;
-- Interfaces responsivas para celular, tablet e computador;
-- Integrações e persistência de dados;
-- Regras de acesso e privacidade de informações;
-- Testes, revisão e homologação de alterações.
+## Problem
 
-## Desafios de engenharia
-**Consistência de dados:** garantir que atualizações entre dispositivos não sobrescrevam informações válidas.
+Independent healthcare professionals often run their practice across paper notebooks, spreadsheets and messaging apps. Appointments, patient history and payments end up in different places, which leads to scheduling errors, lost information and little financial visibility.
 
-**Segurança e isolamento:** manter dados vinculados à conta correta e proteger informações sensíveis.
+## What I'm building
 
-**Evolução incremental:** separar staging de produção e validar mudanças antes da liberação.
+One platform that covers the daily routine of a practice:
 
-**Experiência do usuário:** reduzir etapas desnecessárias em cadastro, agenda e atendimento.
+- **Scheduling:** appointments, availability and service types
+- **Patients:** records and care history linked to the professional's account
+- **Appointments:** fast registration flows during the working day
+- **Finance:** revenue and payment tracking per service
 
-## Arquitetura conceitual
+The interface is designed for phone, tablet and desktop, since professionals switch devices during the day.
+
+## Architecture
+
 ```mermaid
 flowchart LR
-  A[Interface web responsiva] --> B[Camada de aplicação]
-  B --> C[Autenticação e autorização]
-  B --> D[Persistência e sincronização]
-  D --> E[(Dados vinculados à conta)]
-  B --> F[Serviços e integrações]
+  A[Responsive web client] --> B[Application layer]
+  B --> C[Authentication & authorization]
+  B --> D[Persistence & sync]
+  D --> E[(Account-scoped data · PostgreSQL)]
+  B --> F[External services & integrations]
 ```
 
-*Diagrama conceitual, não representação exata da infraestrutura privada.*
+*Simplified view; it does not show the exact production topology.*
 
-## Evidências e limites
-- Site do produto: [app.zayuni.com](https://app.zayuni.com) (pode exigir autenticação).
-- Código-fonte e dados de clientes não são públicos.
-- Funcionalidades descritas representam escopo do produto em desenvolvimento; não se afirma que todas estão liberadas em produção.
+## Engineering challenges and decisions
 
-## Próximas evidências públicas
-Capturas com dados fictícios, demonstração autorizada e decisões técnicas revisadas.
+**Multi-device consistency.** When the same record is edited on more than one device, updates must not overwrite valid data. I designed the persistence and sync flows so that each change is applied on purpose and never silently replaced.
+
+**Tenant isolation and privacy.** Every record belongs to one account, and access rules are enforced in the data layer, not only in the UI. Health-related information is handled as sensitive data.
+
+**Safe, incremental delivery.** Staging and production are separate. Changes are validated in staging before release, and database changes are planned to be reversible.
+
+**Low-friction UX.** I cut unnecessary steps from registration, scheduling and appointment flows so the tool fits a busy clinical routine.
+
+## Next milestones
+
+- Public demo with fictional data
+- Screenshots and a short walkthrough of the main flows
