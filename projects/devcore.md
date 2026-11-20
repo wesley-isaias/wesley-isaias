@@ -1,11 +1,11 @@
-# DevCore: execution engine for AI coding agents
+# DevCore: prototype engine for AI coding tasks
 
 [← Back to profile](../README.md) · [🇧🇷 Português](./pt-br/devcore.md)
 
 | | |
 | --- | --- |
 | **Role** | Creator: architecture, implementation and tests |
-| **Status** | v0.1: foundation (P1–P10) implemented; operational hardening in progress |
+| **Status** | Lab prototype, built in October 2026. Not part of the production workflow; Zayuni is developed through the regular issue → PR → CI → review process. |
 | **Stack** | Python 3 · Docker · GitHub REST API · Ollama-compatible local inference · optional strong-model adapter |
 | **Evidence** | 141 automated tests passing (`pytest`), 19 test modules |
 

@@ -6,7 +6,7 @@
 | --- | --- |
 | **Client** | Federação Sergipana de Surf (state surfing federation, Brazil) |
 | **Role** | Full-stack developer: architecture, front-end, database, payments and deployment |
-| **Status** | In active development, deployed to a staging environment |
+| **Status** | In development, not yet launched. Running on a staging environment. |
 | **Stack** | Next.js 16 (App Router) · React 19 · TypeScript · Supabase (PostgreSQL, Auth) · Mercado Pago · Docker · Google Cloud Run & Cloud Build |
 | **Evidence** | Clean typecheck and lint · 49 automated tests passing · 21 SQL migrations · CI on GitHub Actions and CircleCI |
 
@@ -14,7 +14,7 @@
 
 A state sports federation ran athlete registration, memberships, event entries and rankings by hand. It needed a modern public website and a platform where athletes and staff handle these processes online.
 
-## What I built
+## What I'm building
 
 **Public website:** federation information, events and stages, rankings, supporters, with SEO metadata, Open Graph images, a sitemap and a web app manifest.
 

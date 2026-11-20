@@ -59,5 +59,5 @@ Ferramentas que iniciam trabalho real ficam desabilitadas por uma camada de prot
 
 ## Relacionados
 
-- [DevCore](./devcore.md), o motor de execução que aplica os mesmos princípios a tarefas autônomas de código
+- [DevCore](./devcore.md), um protótipo de laboratório que explora os mesmos princípios em tarefas autônomas de código
 - [Exemplo público: autorização de ferramentas com negação por padrão](../../examples/agent-policy/README.md)

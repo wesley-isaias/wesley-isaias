@@ -103,6 +103,7 @@ html[data-l="en"] .lang [data-set="en"], html[data-l="pt"] .lang [data-set="pt"]
 .chapter h2 { font-size: var(--s3); line-height: 1.12; }
 .chapter p { color: var(--ink); }
 .chapter p.sub { color: var(--muted); }
+.chapter p.status { font: 400 var(--s-1)/1.55 var(--f-mono); color: var(--gate); border: 1px dashed var(--gate); border-radius: 6px; padding: .6rem .8rem; }
 .facts { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; }
 .facts li { display: grid; grid-template-columns: 1.1rem minmax(0, 1fr); gap: .5rem; }
 .facts li::before { content: ""; width: .5rem; height: .5rem; margin-top: .55rem; border-radius: 2px; background: var(--accent); }
@@ -214,8 +215,8 @@ html[data-l="en"] .lang [data-set="en"], html[data-l="pt"] .lang [data-set="pt"]
         <span class="pt">Construo um produto de saúde com agentes de IA, <em>e os controles que mantêm tudo seguro.</em></span>
       </h1>
       <p class="lede">
-        <span class="en">Zayuni is the product. To build it quickly as a small team without risking patient data or production, I built the infrastructure around the agents: where they work, what they can reach, and how their work is verified.</span>
-        <span class="pt">O Zayuni é o produto. Para desenvolvê-lo rápido, com equipe pequena, sem arriscar dados de pacientes nem a produção, construí a infraestrutura em volta dos agentes: onde trabalham, o que podem acessar e como o trabalho deles é verificado.</span>
+        <span class="en">Zayuni is the product. I develop it with AI agents inside a strict delivery process, and I design the infrastructure that keeps it safe: where agents work, what they can reach, and how every change is checked before it reaches production.</span>
+        <span class="pt">O Zayuni é o produto. Desenvolvo-o com agentes de IA dentro de um processo de entrega rígido, e desenho a infraestrutura que mantém tudo seguro: onde os agentes trabalham, o que podem acessar e como cada mudança é verificada antes de chegar à produção.</span>
       </p>
       <p class="who"><strong>Wesley Isaias</strong> · <span class="en">Software Developer · Full-stack & AI engineering · Brazil (UTC−3) · open to remote roles</span><span class="pt">Desenvolvedor de Software · Full-stack e engenharia de IA · Brasil (UTC−3) · aberto a vagas remotas</span></p>
     </div>
@@ -223,7 +224,7 @@ html[data-l="en"] .lang [data-set="en"], html[data-l="pt"] .lang [data-set="pt"]
       <div><b>696</b><span class="en">automated tests passing</span><span class="pt">testes automatizados passando</span></div>
       <div><b>4</b><span class="en">codebases in this story</span><span class="pt">bases de código nesta história</span></div>
       <div><b>72</b><span class="en">versioned SQL migrations</span><span class="pt">migrações SQL versionadas</span></div>
-      <div><b>0</b><span class="en">credentials inside the agent's workspace</span><span class="pt">credenciais dentro do workspace do agente</span></div>
+      <div><b>442</b><span class="en">commits on Zayuni since Sep 2026</span><span class="pt">commits no Zayuni desde set/2026</span></div>
     </div>
     <p class="ledger-note"><span class="en">696 = Zayuni backend 425 + DevCore 141 + Git gateway 81 + FSS 49. Local runs on 20 Nov 2026; subtests not counted.</span><span class="pt">696 = backend do Zayuni 425 + DevCore 141 + gateway Git 81 + FSS 49. Execuções locais em 20/11/2026, sem contar subtestes.</span></p>
   </div>
@@ -259,12 +260,13 @@ html[data-l="en"] .lang [data-set="en"], html[data-l="pt"] .lang [data-set="pt"]
         <li><span class="en">The model can report "tests pass" without running anything.</span><span class="pt">O modelo pode dizer que "os testes passam" sem rodar nada.</span></li>
         <li><span class="en">Sending every task to the most expensive model burns money on work that needs no model.</span><span class="pt">Mandar toda tarefa para o modelo mais caro gasta dinheiro em trabalho que nem precisa de modelo.</span></li>
       </ul>
-      <p><span class="en">So I split the problem in two: <b>where</b> agents work, and <b>how</b> their tasks run.</span><span class="pt">Então dividi o problema em dois: <b>onde</b> os agentes trabalham e <b>como</b> as tarefas são executadas.</span></p>
+      <p><span class="en">So every change follows the same path, and I design the infrastructure that removes what agents should never hold.</span><span class="pt">Por isso toda mudança segue o mesmo caminho, e desenho a infraestrutura que tira dos agentes o que eles nunca deveriam ter.</span></p>
     </section>
 
     <section class="chapter" data-step="workspace" id="workspace">
       <p class="eyebrow"><span class="en">Where agents work · MCP</span><span class="pt">Onde os agentes trabalham · MCP</span></p>
-      <h2><span class="en">ChatGPT and Claude get a workspace with nothing to steal.</span><span class="pt">ChatGPT e Claude recebem um workspace sem nada a roubar.</span></h2>
+      <h2><span class="en">A workspace with nothing to steal.</span><span class="pt">Um workspace sem nada a roubar.</span></h2>
+      <p class="status"><span class="en">Status: MCP gateway v0.6 in operation (14 tools). The Dev Workspace security layer below is built and tested offline, and goes through an independent security review before installation.</span><span class="pt">Status: gateway MCP v0.6 em operação (14 ferramentas). A camada de segurança do Dev Workspace descrita abaixo está implementada e testada offline, e passa por revisão de segurança independente antes da instalação.</span></p>
       <p class="sub"><span class="en">Agents connect through the Model Context Protocol to an isolated development container. The container is treated as already compromised, so it holds no credentials and its outbound traffic is controlled.</span><span class="pt">Os agentes se conectam pelo Model Context Protocol a um contêiner de desenvolvimento isolado. O contêiner é tratado como já comprometido: não guarda credenciais, e o tráfego de saída é controlado.</span></p>
       <ul class="facts">
         <li><span class="en">Cloudflare Access Managed OAuth signs the user in. The origin verifies the JWT on every <code>/mcp</code> request: RS256 only, exact issuer and audience, at most 60 s of clock skew.</span><span class="pt">O login é feito pelo Cloudflare Access Managed OAuth. A origem verifica o JWT em toda requisição <code>/mcp</code>: apenas RS256, issuer e audience exatos, no máximo 60 s de diferença de relógio.</span></li>
@@ -277,7 +279,7 @@ html[data-l="en"] .lang [data-set="en"], html[data-l="pt"] .lang [data-set="pt"]
     <section class="chapter" data-step="gateway" id="gateway">
       <p class="eyebrow"><span class="en">What leaves the box</span><span class="pt">O que sai do ambiente</span></p>
       <h2><span class="en">Every push is inspected. Every action is on the record.</span><span class="pt">Todo push é inspecionado. Toda ação fica registrada.</span></h2>
-      <p class="sub"><span class="en">The only route from the workspace to GitHub is a Git gateway I wrote with the Python standard library only. The GitHub token lives there and nowhere else.</span><span class="pt">O único caminho do workspace até o GitHub é um gateway Git que escrevi só com a biblioteca padrão do Python. O token do GitHub fica ali e em nenhum outro lugar.</span></p>
+      <p class="sub"><span class="en">In the Dev Workspace design, the only route to GitHub is a Git gateway I wrote with the Python standard library only. The GitHub token lives there and nowhere else.</span><span class="pt">No desenho do Dev Workspace, o único caminho até o GitHub é um gateway Git que escrevi só com a biblioteca padrão do Python. O token do GitHub fica ali e em nenhum outro lugar.</span></p>
       <ul class="facts">
         <li><span class="en">Each pushed pack is indexed in quarantine with <code>git index-pack --strict</code>, checked for fast-forward, and every changed path is compared against protected paths before it is forwarded.</span><span class="pt">Cada pacote enviado é indexado em quarentena com <code>git index-pack --strict</code>, verificado como fast-forward, e cada caminho alterado é comparado com os caminhos protegidos antes do encaminhamento.</span></li>
         <li><span class="en">The audit log stores a closed, content-free schema, chained with HMAC. The kernel verifies each producer's identity (<code>SO_PEERCRED</code>).</span><span class="pt">O log de auditoria guarda um esquema fechado e sem conteúdo, encadeado por HMAC. O kernel verifica a identidade de cada produtor (<code>SO_PEERCRED</code>).</span></li>
@@ -288,26 +290,23 @@ html[data-l="en"] .lang [data-set="en"], html[data-l="pt"] .lang [data-set="pt"]
       <a class="more" href="https://github.com/wesley-isaias/wesley-isaias/blob/main/projects/mcp.md"><span class="en">MCP workspace case study →</span><span class="pt">Estudo de caso do workspace MCP →</span></a>
     </section>
 
-    <section class="chapter" data-step="devcore" id="devcore">
-      <p class="eyebrow"><span class="en">How tasks run · DevCore</span><span class="pt">Como as tarefas rodam · DevCore</span></p>
-      <h2><span class="en">The model reasons. Deterministic code executes and checks.</span><span class="pt">O modelo raciocina. Código determinístico executa e verifica.</span></h2>
-      <p class="sub"><span class="en">DevCore is the engine I built to run coding tasks. The model only proposes actions through a small set of allowed tools. A router decides, per task, the cheapest route that can do the job.</span><span class="pt">O DevCore é o motor que construí para executar tarefas de código. O modelo só propõe ações por um conjunto pequeno de ferramentas permitidas. Um roteador decide, por tarefa, a rota mais barata capaz de resolvê-la.</span></p>
+    <section class="chapter" data-step="ship" id="ship">
+      <p class="eyebrow"><span class="en">How every change ships</span><span class="pt">Como cada mudança é entregue</span></p>
+      <h2><span class="en">Agents propose. Tests, review and a person decide.</span><span class="pt">Agentes propõem. Testes, revisão e uma pessoa decidem.</span></h2>
+      <p class="sub"><span class="en">I write the code with Claude, ChatGPT and other coding agents. What makes that safe is the path every change takes, whoever wrote it.</span><span class="pt">Escrevo o código com Claude, ChatGPT e outros agentes de código. O que torna isso seguro é o caminho que toda mudança percorre, não importa quem a escreveu.</span></p>
       <ul class="facts">
-        <li><span class="en">Routes: no model, a local model (Ollama-compatible), a stronger model, or a human. Protected operations always go to a human.</span><span class="pt">Rotas: sem modelo, modelo local (compatível com Ollama), modelo mais forte ou humano. Operações protegidas sempre vão para um humano.</span></li>
-        <li><span class="en">Each task gets its own worktree from a base verified against GitHub. Checks run in a separate Docker runner against the modified code.</span><span class="pt">Cada tarefa recebe sua própria worktree a partir de uma base verificada no GitHub. As verificações rodam num executor Docker separado, sobre o código modificado.</span></li>
-        <li><span class="en">One task ends as one pull request, and the engine stops there. No merge, no deploy.</span><span class="pt">Uma tarefa termina em um pull request, e o motor para ali. Sem merge, sem deploy.</span></li>
-        <li><span class="en">Routing changes are replayed offline against recorded telemetry before they are adopted.</span><span class="pt">Mudanças de roteamento são testadas offline contra a telemetria registrada antes de serem adotadas.</span></li>
+        <li><span class="en">Work starts from an approved issue, on its own branch. Nothing is developed on <code>main</code>.</span><span class="pt">O trabalho começa de uma issue aprovada, em branch próprio. Nada é desenvolvido na <code>main</code>.</span></li>
+        <li><span class="en">CI runs lint, type checks, the web build and the backend suite. Dedicated regression workflows guard agenda time zones, finance receipts and patient search.</span><span class="pt">A CI roda lint, checagem de tipos, build web e a suíte do backend. Workflows de regressão dedicados protegem fuso horário da agenda, comprovantes do financeiro e busca de pacientes.</span></li>
+        <li><span class="en">Merging deploys to staging. Production is a separate promotion that I approve explicitly.</span><span class="pt">O merge publica em staging. Produção é uma promoção separada, que eu aprovo explicitamente.</span></li>
+        <li><span class="en">Migrations must be additive and backward compatible, because production holds real data.</span><span class="pt">Migrações precisam ser aditivas e compatíveis com a versão anterior, porque a produção tem dados reais.</span></li>
       </ul>
-      <div class="stack"><span>Python</span><span>LLM routing</span><span>Ollama API</span><span>Docker runner</span><span>GitHub REST API</span></div>
-<pre class="receipt"><span class="cmd">$ pytest</span>
-<span class="ok">141 passed</span>, 147 subtests passed</pre>
-      <a class="more" href="https://github.com/wesley-isaias/wesley-isaias/blob/main/projects/devcore.md"><span class="en">DevCore case study →</span><span class="pt">Estudo de caso do DevCore →</span></a>
+      <p class="sub"><span class="en">Lab: I also prototyped <a href="https://github.com/wesley-isaias/wesley-isaias/blob/main/projects/devcore.md">DevCore</a>, an engine that routes coding tasks between local models, stronger models and people, and validates each change in an isolated runner (141 tests). It is an experiment, not part of the production workflow.</span><span class="pt">Laboratório: também prototipei o <a href="https://github.com/wesley-isaias/wesley-isaias/blob/main/projects/pt-br/devcore.md">DevCore</a>, um motor que roteia tarefas de código entre modelos locais, modelos mais fortes e pessoas, e valida cada mudança num executor isolado (141 testes). É um experimento, não faz parte do fluxo de produção.</span></p>
     </section>
 
     <section class="chapter" data-step="client" id="client">
       <p class="eyebrow"><span class="en">Same discipline, for a client</span><span class="pt">A mesma disciplina, para um cliente</span></p>
-      <h2><span class="en">A state surf federation goes online.</span><span class="pt">Uma federação estadual de surf vai para o digital.</span></h2>
-      <p class="sub"><span class="en">For the Sergipe Surf Federation I built the public site and the athlete platform: registration, memberships, event entries, rankings imported from LiveHeats, and an admin area.</span><span class="pt">Para a Federação Sergipana de Surf construí o site público e a plataforma do atleta: cadastro, filiação, inscrições em etapas, ranking importado do LiveHeats e área administrativa.</span></p>
+      <h2><span class="en">A state surf federation is going digital.</span><span class="pt">Uma federação estadual de surf a caminho do digital.</span></h2>
+      <p class="sub"><span class="en">For the Sergipe Surf Federation I am building the public site and the athlete platform, now in development on staging: registration, memberships, event entries, rankings imported from LiveHeats, and an admin area.</span><span class="pt">Para a Federação Sergipana de Surf estou construindo o site público e a plataforma do atleta, em desenvolvimento no ambiente de homologação: cadastro, filiação, inscrições em etapas, ranking importado do LiveHeats e área administrativa.</span></p>
       <ul class="facts">
         <li><span class="en">Pix and card payments through Mercado Pago, confirmed by webhook. The return page ignores URL parameters and asks the payment API directly.</span><span class="pt">Pagamentos por Pix e cartão via Mercado Pago, confirmados por webhook. A página de retorno ignora os parâmetros da URL e consulta a API de pagamentos.</span></li>
         <li><span class="en">Docker image built by Cloud Build and deployed to Cloud Run by image digest.</span><span class="pt">Imagem Docker gerada pelo Cloud Build e publicada no Cloud Run pelo digest.</span></li>
@@ -322,7 +321,7 @@ html[data-l="en"] .lang [data-set="en"], html[data-l="pt"] .lang [data-set="pt"]
 
   <aside class="figure" id="figure" data-step="all" aria-label="System map">
     <svg viewBox="0 0 400 560" role="img" aria-labelledby="map-title">
-      <title id="map-title">System map: AI agents reach a credential-free workspace through a JWT verifier; pushes go through an inspecting Git gateway to GitHub; DevCore runs tasks; staging and a human-approved production deploy serve the products.</title>
+      <title id="map-title">System map: AI agents reach a credential-free workspace through a JWT verifier; pushes go through an inspecting Git gateway to GitHub; CI and human review gate every change; staging comes before a human-approved production deploy.</title>
       <defs>
         <marker id="ah" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
           <path class="arrow" d="M0,0 L8,4 L0,8 z"/>
@@ -335,7 +334,7 @@ html[data-l="en"] .lang [data-set="en"], html[data-l="pt"] .lang [data-set="pt"]
       <!-- edges -->
       <path class="edge flow" data-a="agents" data-b="verifier" d="M105,72 V102" marker-end="url(#ah)"/>
       <path class="edge flow" data-a="verifier" data-b="workspace" d="M105,154 V196" marker-end="url(#ah)"/>
-      <path class="edge flow" data-a="devcore" data-b="workspace" d="M210,222 H192" marker-end="url(#ah)"/>
+      <path class="edge flow" data-a="github" data-b="review" d="M190,376 H210" marker-end="url(#ah)"/>
       <path class="edge flow" data-a="workspace" data-b="gateway" d="M105,248 V268" marker-end="url(#ah)"/>
       <path class="edge" data-a="gateway" data-b="audit" d="M190,294 H210" marker-end="url(#ah)"/>
       <path class="edge" data-a="verifier" data-b="audit" d="M190,128 C 330,128 330,200 300,268" marker-end="url(#ah)"/>
@@ -352,13 +351,13 @@ html[data-l="en"] .lang [data-set="en"], html[data-l="pt"] .lang [data-set="pt"]
       <g class="node" data-id="agents"><rect x="20" y="20" width="170" height="52" rx="8"/><text class="t1" x="34" y="42">ChatGPT · Claude</text><text class="t2" x="34" y="60">AI agents</text></g>
       <g class="node" data-id="verifier"><rect x="20" y="102" width="170" height="52" rx="8"/><text class="t1" x="34" y="124">JWT verifier</text><text class="t2" x="34" y="142">OAuth · fail-closed</text></g>
       <g class="node" data-id="workspace"><rect x="20" y="196" width="170" height="52" rx="8"/><text class="t1" x="34" y="218">Dev Workspace</text><text class="t2" x="34" y="236">MCP · isolated</text></g>
-      <g class="node" data-id="devcore"><rect x="210" y="196" width="170" height="52" rx="8"/><text class="t1" x="224" y="218">DevCore</text><text class="t2" x="224" y="236">router · runner</text></g>
+      <g class="node human" data-id="review"><rect x="210" y="350" width="170" height="52" rx="8"/><text class="t1" x="224" y="372">CI · review</text><text class="t2" x="224" y="390">tests · human approval</text></g>
       <g class="node" data-id="gateway"><rect x="20" y="268" width="170" height="52" rx="8"/><text class="t1" x="34" y="290">Git gateway</text><text class="t2" x="34" y="308">token · push inspection</text></g>
       <g class="node" data-id="audit"><rect x="210" y="268" width="170" height="52" rx="8"/><text class="t1" x="224" y="290">Audit log</text><text class="t2" x="224" y="308">HMAC chain · ACK</text></g>
       <g class="node" data-id="github"><rect x="20" y="350" width="170" height="52" rx="8"/><text class="t1" x="34" y="372">GitHub</text><text class="t2" x="34" y="390">one reviewable PR</text></g>
       <g class="node" data-id="staging"><rect x="20" y="432" width="170" height="52" rx="8"/><text class="t1" x="34" y="454">Staging</text><text class="t2" x="34" y="472">CI · validation</text></g>
       <g class="node human" data-id="production"><rect x="210" y="432" width="170" height="52" rx="8"/><text class="t1" x="224" y="454">Production</text><text class="t2" x="224" y="472">human promotion</text></g>
-      <g class="node" data-id="product"><rect x="210" y="500" width="170" height="52" rx="8"/><text class="t1" x="224" y="522">Zayuni · FSS</text><text class="t2" x="224" y="540">real users</text></g>
+      <g class="node" data-id="product"><rect x="210" y="500" width="170" height="52" rx="8"/><text class="t1" x="224" y="522">Zayuni</text><text class="t2" x="224" y="540">end users</text></g>
     </svg>
     <div class="legend">
       <span><i style="background: var(--accent)"></i><span class="en">path of a change</span><span class="pt">caminho de uma mudança</span></span>
@@ -409,8 +408,8 @@ html[data-l="en"] .lang [data-set="en"], html[data-l="pt"] .lang [data-set="pt"]
     risk: ["agents", "github", "production"],
     workspace: ["agents", "verifier", "workspace"],
     gateway: ["workspace", "gateway", "audit", "github"],
-    devcore: ["devcore", "workspace", "github"],
-    client: ["github", "staging", "production", "product"]
+    ship: ["github", "review", "staging", "production"],
+    client: ["github", "review", "staging"]
   };
   var nodes = fig.querySelectorAll(".node");
   var edges = fig.querySelectorAll(".edge");

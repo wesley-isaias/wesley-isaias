@@ -14,7 +14,7 @@ Brasil (UTC−3) · Aberto a oportunidades remotas no Brasil e no exterior
 
 ---
 
-**O Zayuni é o produto: um SaaS de saúde. Para desenvolvê-lo rápido, com equipe pequena, sem arriscar dados de pacientes nem a produção, construí a infraestrutura em volta dos agentes de IA que ajudam a desenvolvê-lo:** o **workspace MCP** controla *onde* os agentes trabalham e *o que* podem acessar, e o **DevCore** controla *como* as tarefas são executadas e *como* o resultado é verificado.
+**O Zayuni é o produto: um SaaS de saúde que desenvolvo com agentes de IA dentro de um processo de entrega rígido.** Toda mudança começa de uma issue aprovada, passa por testes, CI e revisão, e só chega à produção por uma promoção explícita. Junto com o produto, desenho a infraestrutura que limita o que os agentes podem acessar: um **gateway MCP** em operação e uma **camada de segurança do Dev Workspace** implementada e testada, que passa por revisão de segurança antes da instalação.
 
 **[▶ Leia a história: um passeio pelo sistema inteiro, rolando a página](https://wesley-isaias.github.io/wesley-isaias/)**
 
@@ -32,21 +32,23 @@ Agenda, pacientes, histórico de atendimentos e financeiro num app para celular,
 ### 2 · A infraestrutura de IA por trás dele
 
 #### Zayuni Dev Workspace: acesso MCP seguro para agentes de IA
-*Onde os agentes trabalham.* ChatGPT e Claude se conectam por MCP a um contêiner isolado, sem credenciais. Um gateway Git inspeciona cada push e mantém o token do GitHub fora do workspace, um verificador JWT protege o endpoint MCP, e um log de auditoria à prova de adulteração registra cada ação.
+*Onde os agentes trabalham.* Um gateway MCP está em operação com 14 ferramentas. A próxima camada, implementada e testada offline e aguardando revisão de segurança antes da instalação, dá ao ChatGPT e ao Claude um contêiner isolado, sem credenciais. Um gateway Git inspeciona cada push e mantém o token do GitHub fora do workspace, um verificador JWT protege o endpoint MCP, e um log de auditoria à prova de adulteração registra cada ação.
 <br>`MCP` `Python` `Node.js` `OAuth/JWT` `Docker` `Cloudflare Access` · **81 testes do gateway + checks de segurança offline na CI**
 <br>**[Estudo de caso](./projects/pt-br/mcp.md)**
 
-#### DevCore: motor de execução para agentes de código
-*Como as tarefas rodam.* O modelo só propõe ações por ferramentas permitidas. Um roteador escolhe a rota mais barata capaz de resolver (sem modelo, modelo local, modelo mais forte ou humano), as verificações rodam num executor isolado, e cada tarefa termina em um único pull request revisável.
-<br>`Python` `Roteamento de LLMs` `Inferência local compatível com Ollama` `Docker` `API do GitHub` · **141 testes automatizados**
-<br>**[Estudo de caso](./projects/pt-br/devcore.md)**
-
 ### 3 · A mesma disciplina, para um cliente
 
-#### Federação Sergipana de Surf: plataforma de atletas e competições
-Site público e plataforma do atleta para uma federação esportiva estadual: cadastro, filiações, inscrições em etapas, pagamentos por Pix e cartão com webhooks, ranking importado do LiveHeats e área administrativa.
+#### Federação Sergipana de Surf: plataforma de atletas e competições (em desenvolvimento)
+Site público e plataforma do atleta para uma federação esportiva estadual, em desenvolvimento no ambiente de homologação: cadastro, filiações, inscrições em etapas, pagamentos por Pix e cartão com webhooks, ranking importado do LiveHeats e área administrativa.
 <br>`Next.js 16` `React 19` `TypeScript` `Supabase` `Mercado Pago` `Google Cloud Run` · **49 testes · 21 migrações SQL · lint e typecheck na CI**
 <br>**[Estudo de caso](./projects/pt-br/fss.md)**
+
+### Laboratório
+
+#### DevCore: protótipo de motor para tarefas de código com IA
+Um experimento de outubro de 2026: o modelo só propõe ações por ferramentas permitidas, um roteador escolhe a rota mais barata capaz de resolver (sem modelo, modelo local, modelo mais forte ou humano), e as verificações rodam num executor isolado antes de abrir um pull request. Não faz parte do fluxo de produção.
+<br>`Python` `Roteamento de LLMs` `Inferência local compatível com Ollama` `Docker` · **141 testes automatizados**
+<br>**[Notas](./projects/pt-br/devcore.md)**
 
 ## Tecnologias
 

@@ -50,7 +50,7 @@ flowchart LR
 
 ## Construído com agentes de IA
 
-O Zayuni é desenvolvido com agentes de IA trabalhando pelo [workspace MCP](./mcp.md) e pelo [DevCore](./devcore.md). Os agentes trabalham em branches de funcionalidade. Toda mudança passa por testes, CI e revisão humana, e nada chega à produção sem uma promoção explícita.
+Desenvolvo o Zayuni com Claude, ChatGPT e outros agentes de código. O trabalho começa de uma issue aprovada, em branch próprio. Toda mudança passa por testes, CI e revisão humana, e nada chega à produção sem uma promoção explícita. O [workspace MCP](./mcp.md) nasceu desse trabalho, para limitar o que os agentes podem acessar.
 
 ## Próximos passos
 

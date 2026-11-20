@@ -14,7 +14,7 @@ Brazil (UTC−3) · Open to remote roles in Brazil and internationally
 
 ---
 
-**Zayuni is the product: a healthcare SaaS. To build it quickly as a small team without risking patient data or production, I built the infrastructure around the AI agents that help develop it:** the **MCP workspace** controls *where* agents work and *what* they can reach, and **DevCore** controls *how* their tasks run and *how* the result is verified.
+**Zayuni is the product: a healthcare SaaS that I develop with AI coding agents inside a strict delivery process.** Every change starts from an approved issue, runs through tests, CI and review, and reaches production only through an explicit promotion. Alongside the product, I design the infrastructure that limits what agents can reach: an **MCP gateway** in operation, and a **Dev Workspace security layer** that is built and tested and goes through security review before installation.
 
 **[▶ Read the story: a scrolling walkthrough of the whole system](https://wesley-isaias.github.io/wesley-isaias/)**
 
@@ -32,21 +32,23 @@ Scheduling, patient records, care history and finances in one app for phone, tab
 ### 2 · The AI infrastructure behind it
 
 #### Zayuni Dev Workspace: secure MCP access for AI agents
-*Where agents work.* ChatGPT and Claude connect over MCP to an isolated container that holds no credentials. A Git gateway inspects every push and keeps the GitHub token out of the workspace, a JWT verifier guards the MCP endpoint, and a tamper-evident audit log records every action.
+*Where agents work.* An MCP gateway is in operation with 14 tools. The next layer, built and tested offline and pending security review before installation, gives ChatGPT and Claude an isolated container that holds no credentials. A Git gateway inspects every push and keeps the GitHub token out of the workspace, a JWT verifier guards the MCP endpoint, and a tamper-evident audit log records every action.
 <br>`MCP` `Python` `Node.js` `OAuth/JWT` `Docker` `Cloudflare Access` · **81 gateway tests + offline security checks in CI**
 <br>**[Case study](./projects/mcp.md)**
 
-#### DevCore: execution engine for AI coding agents
-*How tasks run.* The model only proposes actions through allow-listed tools. A router picks the cheapest capable route (no model, local model, stronger model or human), checks run in an isolated runner, and every task ends as one reviewable pull request.
-<br>`Python` `LLM routing` `Ollama-compatible local inference` `Docker` `GitHub API` · **141 automated tests**
-<br>**[Case study](./projects/devcore.md)**
-
 ### 3 · The same discipline, for a client
 
-#### Sergipe Surf Federation: athlete and competition platform
-Public website and athlete platform for a state sports federation: registration, memberships, event entries, Pix and card payments with webhooks, rankings imported from LiveHeats, and an admin area.
+#### Sergipe Surf Federation: athlete and competition platform (in development)
+Public website and athlete platform for a state sports federation, in development on staging: registration, memberships, event entries, Pix and card payments with webhooks, rankings imported from LiveHeats, and an admin area.
 <br>`Next.js 16` `React 19` `TypeScript` `Supabase` `Mercado Pago` `Google Cloud Run` · **49 tests · 21 SQL migrations · lint and typecheck in CI**
 <br>**[Case study](./projects/fss.md)**
+
+### Lab
+
+#### DevCore: prototype engine for AI coding tasks
+An experiment from October 2026: the model only proposes actions through allow-listed tools, a router picks the cheapest capable route (no model, local model, stronger model or human), and checks run in an isolated runner before a pull request is opened. It is not part of the production workflow.
+<br>`Python` `LLM routing` `Ollama-compatible local inference` `Docker` · **141 automated tests**
+<br>**[Notes](./projects/devcore.md)**
 
 ## Tech stack
 

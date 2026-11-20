@@ -59,5 +59,5 @@ Tools that start real work stay disabled by a protection overlay until human aut
 
 ## Related
 
-- [DevCore](./devcore.md), the execution engine that applies the same principles to autonomous coding tasks
+- [DevCore](./devcore.md), a lab prototype that explores the same principles for autonomous coding tasks
 - [Public example: deny-by-default tool authorization](../examples/agent-policy/README.md)

@@ -6,7 +6,7 @@
 | --- | --- |
 | **Cliente** | Federação Sergipana de Surf |
 | **Papel** | Desenvolvedor full-stack: arquitetura, front-end, banco de dados, pagamentos e deploy |
-| **Status** | Em desenvolvimento ativo, publicado em ambiente de homologação |
+| **Status** | Em desenvolvimento, ainda não lançado. Rodando em ambiente de homologação. |
 | **Tecnologias** | Next.js 16 (App Router) · React 19 · TypeScript · Supabase (PostgreSQL, Auth) · Mercado Pago · Docker · Google Cloud Run e Cloud Build |
 | **Evidências** | Typecheck e lint sem erros · 49 testes automatizados passando · 21 migrações SQL · CI no GitHub Actions e no CircleCI |
 
@@ -14,7 +14,7 @@
 
 Uma federação esportiva estadual fazia manualmente o cadastro de atletas, as filiações, as inscrições em etapas e o ranking. Ela precisava de um site público moderno e de uma plataforma em que atletas e equipe resolvessem esses processos online.
 
-## O que construí
+## O que estou construindo
 
 **Site público:** informações da federação, etapas, ranking e apoiadores, com metadados de SEO, imagens Open Graph, sitemap e manifesto de aplicativo web.
 
