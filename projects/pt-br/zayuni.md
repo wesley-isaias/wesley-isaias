@@ -4,8 +4,8 @@
 
 | | |
 | --- | --- |
-| **Papel** | Criador: produto, arquitetura, front-end, back-end, dados e releases |
-| **Status** | Em desenvolvimento ativo · [app.zayuni.com](https://app.zayuni.com) (requer login) |
+| **Papel** | Fundador: produto, arquitetura e desenvolvimento, construído com agentes de IA |
+| **Status** | Em produção com usuários reais, em desenvolvimento ativo · [app.zayuni.com](https://app.zayuni.com) (requer login) |
 | **Tecnologias** | Expo · React Native Web · Expo Router · PWA · Python · FastAPI · Supabase (Auth, PostgreSQL, row-level security) · Docker · Google Cloud Run · Secret Manager |
 | **Evidências** | 425 testes de backend passando (`pytest`) · 43 arquivos de teste no front-end · 51 migrações SQL · 442 commits desde setembro de 2026 |
 

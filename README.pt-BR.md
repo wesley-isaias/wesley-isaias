@@ -14,7 +14,7 @@ Brasil (UTC−3) · Aberto a oportunidades remotas no Brasil e no exterior
 
 ---
 
-**O Zayuni é o produto: um SaaS de saúde que desenvolvo com agentes de IA dentro de um processo de entrega rígido.** Toda mudança começa de uma issue aprovada, passa por testes, CI e revisão, e só chega à produção por uma promoção explícita. Para que isso seja seguro, construí e opero o **Zayuni DevWS**, meu próprio servidor MCP: o ChatGPT e o Claude trabalham nos meus repositórios por um workspace isolado e sem credenciais, com cada push inspecionado e cada ação auditada.
+**O Zayuni é o produto: um SaaS de saúde com usuários reais, que fundei e desenvolvo com agentes de IA dentro de um processo de entrega rígido.** Toda mudança começa de uma issue aprovada, passa por testes, CI e revisão, e só chega à produção por uma promoção explícita. Para que isso seja seguro, construí e opero o **Zayuni DevWS**, meu próprio servidor MCP: o ChatGPT e o Claude trabalham nos meus repositórios por um workspace isolado e sem credenciais, com cada push inspecionado e cada ação auditada.
 
 **[▶ Leia a história: um passeio pelo sistema inteiro, rolando a página](https://wesley-isaias.github.io/wesley-isaias/)**
 
@@ -24,7 +24,7 @@ Atuo de ponta a ponta: requisitos, modelagem de dados, interface, integrações,
 
 ### 1 · O produto
 
-#### Zayuni: gestão de consultório para profissionais de saúde
+#### Zayuni: gestão de consultório para profissionais de saúde · *fundador*
 Agenda, pacientes, histórico de atendimentos e financeiro num app para celular, tablet e computador. Agendamentos sincronizados com Google Calendar e iCloud, cobranças Pix como BR Code e comprovantes lidos por OCR no próprio aparelho, sem que o comprovante saia do celular. Cada registro fica restrito à sua conta por row-level security.
 <br>`Expo` `React Native Web` `Python` `FastAPI` `Supabase` `PostgreSQL RLS` `Cloud Run` · **425 testes no backend · 51 migrações SQL · 442 commits**
 <br>**[Estudo de caso](./projects/pt-br/zayuni.md)** · **[Produto](https://app.zayuni.com)**
@@ -57,7 +57,7 @@ Um experimento de outubro de 2026: o modelo só propõe ações por ferramentas 
 | **Linguagens** | TypeScript, Python, JavaScript, SQL |
 | **Front-end** | React 19, Next.js (App Router), Expo / React Native Web, PWA, interfaces responsivas |
 | **Back-end e dados** | Python (FastAPI), Node.js, Supabase (PostgreSQL, Auth, row-level security, migrações SQL), APIs REST, webhooks, Pix (BR Code, Mercado Pago), Google Calendar e CalDAV |
-| **Engenharia de IA** | Model Context Protocol (MCP), orquestração de agentes de código, roteamento de modelos (local ↔ avançado ↔ humano), inferência local compatível com Ollama, telemetria de agentes |
+| **Engenharia de IA** | Servidores Model Context Protocol (MCP), desenvolvimento com agentes de código (Claude, ChatGPT), segurança de agentes: isolamento de credenciais, ferramentas delimitadas, auditoria · *laboratório:* roteamento de modelos e LLMs locais |
 | **Segurança** | Verificação OAuth/JWT (RS256, falha fechada), isolamento de credenciais, inspeção de push Git, logs de auditoria encadeados por HMAC, privilégio mínimo |
 | **Infraestrutura** | Linux, Docker, Google Cloud Run e Cloud Build, Cloudflare, GitHub Actions, CircleCI |
 | **Práticas** | Revisão de pull requests, testes automatizados, staging → produção, migrações reversíveis |

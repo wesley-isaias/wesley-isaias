@@ -4,8 +4,8 @@
 
 | | |
 | --- | --- |
-| **Role** | Creator: product, architecture, front-end, back-end, data and releases |
-| **Status** | In active development · [app.zayuni.com](https://app.zayuni.com) (sign-in required) |
+| **Role** | Founder: product, architecture and development, built with AI coding agents |
+| **Status** | In production with real users, under active development · [app.zayuni.com](https://app.zayuni.com) (sign-in required) |
 | **Stack** | Expo · React Native Web · Expo Router · PWA · Python · FastAPI · Supabase (Auth, PostgreSQL, row-level security) · Docker · Google Cloud Run · Secret Manager |
 | **Evidence** | 425 backend tests passing (`pytest`) · 43 front-end test files · 51 SQL migrations · 442 commits since September 2026 |
 

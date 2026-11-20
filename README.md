@@ -14,7 +14,7 @@ Brazil (UTC−3) · Open to remote roles in Brazil and internationally
 
 ---
 
-**Zayuni is the product: a healthcare SaaS that I develop with AI coding agents inside a strict delivery process.** Every change starts from an approved issue, runs through tests, CI and review, and reaches production only through an explicit promotion. To make that safe, I built and run **Zayuni DevWS**, my own MCP server: ChatGPT and Claude work in my repositories through an isolated workspace that holds no credentials, with every push inspected and every action audited.
+**Zayuni is the product: a healthcare SaaS with real users, which I founded and develop with AI coding agents inside a strict delivery process.** Every change starts from an approved issue, runs through tests, CI and review, and reaches production only through an explicit promotion. To make that safe, I built and run **Zayuni DevWS**, my own MCP server: ChatGPT and Claude work in my repositories through an isolated workspace that holds no credentials, with every push inspected and every action audited.
 
 **[▶ Read the story: a scrolling walkthrough of the whole system](https://wesley-isaias.github.io/wesley-isaias/)**
 
@@ -24,7 +24,7 @@ I work end to end: requirements, data modeling, UI, integrations, testing and co
 
 ### 1 · The product
 
-#### Zayuni: practice management for health professionals
+#### Zayuni: practice management for health professionals · *founder*
 Scheduling, patient records, care history and finances in one app for phone, tablet and desktop. Appointments sync to Google Calendar and iCloud, Pix charges as BR Codes, and payment receipts read by OCR on the device, so receipts never leave the phone. Every row is scoped per account with row-level security.
 <br>`Expo` `React Native Web` `Python` `FastAPI` `Supabase` `PostgreSQL RLS` `Cloud Run` · **425 backend tests · 51 SQL migrations · 442 commits**
 <br>**[Case study](./projects/zayuni.md)** · **[Product](https://app.zayuni.com)**
@@ -57,7 +57,7 @@ An experiment from October 2026: the model only proposes actions through allow-l
 | **Languages** | TypeScript, Python, JavaScript, SQL |
 | **Front-end** | React 19, Next.js (App Router), Expo / React Native Web, PWA, responsive interfaces |
 | **Back-end & data** | Python (FastAPI), Node.js, Supabase (PostgreSQL, Auth, row-level security, SQL migrations), REST APIs, webhooks, Pix (BR Code, Mercado Pago), Google Calendar & CalDAV |
-| **AI engineering** | Model Context Protocol (MCP), coding-agent orchestration, model routing (local ↔ frontier ↔ human), Ollama-compatible local inference, agent telemetry |
+| **AI engineering** | Model Context Protocol (MCP) servers, development with AI coding agents (Claude, ChatGPT), agent security: credential isolation, scoped tools, audit logging · *lab:* model routing and local LLMs |
 | **Security** | OAuth/JWT verification (RS256, fail-closed), credential isolation, Git push inspection, HMAC-chained audit logs, least privilege |
 | **Infrastructure** | Linux, Docker, Google Cloud Run & Cloud Build, Cloudflare, GitHub Actions, CircleCI |
 | **Practices** | Pull-request review, automated testing, staging → production releases, reversible migrations |
