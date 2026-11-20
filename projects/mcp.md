@@ -1,41 +1,46 @@
-# Zayuni Dev Workspace MCP — ferramentas para agentes de IA
+# Zayuni Dev Workspace: MCP tooling for AI agents
 
-[← Voltar ao perfil](../README.md)
+[← Back to profile](../README.md) · [🇧🇷 Português](./pt-br/mcp.md)
 
-## Problema
-Agentes de IA precisam interagir com ambientes de desenvolvimento sem receber acesso irrestrito a máquinas, dados ou operações destrutivas.
+| | |
+| --- | --- |
+| **Role** | Design, integration and operation of the workspace |
+| **Status** | In use in my own development workflow (private repository) |
+| **Stack** | Model Context Protocol (MCP) · Linux · Docker · remote environments |
 
-## Proposta técnica
-Desenvolvimento de integrações baseadas no **Model Context Protocol (MCP)** para expor ferramentas de desenvolvimento a agentes, com escopo de autorização, controles e validação.
+## Problem
 
-## Áreas trabalhadas
-- Integração entre agentes e ferramentas de desenvolvimento;
-- Operações remotas em ambientes Linux;
-- Contêineres e serviços de infraestrutura;
-- Testes automatizados e verificação de resultados;
-- Segurança, permissões e delimitação de operações.
+AI agents are most useful when they can read code, run commands and check results in a real environment. Unrestricted access to machines, data or destructive operations is not acceptable, though. The question is how an agent can be productive while every action stays scoped, traceable and reversible.
 
-## Fluxo conceitual
+## Approach
+
+I built an integration based on the **Model Context Protocol (MCP)**, the open standard that connects AI clients to external tools. It exposes a defined set of development tools on remote Linux environments, such as file access, process execution and search, inside configured access boundaries.
+
 ```mermaid
 flowchart TD
-  A[Usuário / operador] --> B[Agente de IA]
-  B --> C[Cliente MCP]
-  C --> D[Servidor de ferramentas MCP]
-  D --> E[Validação de escopo e permissões]
-  E --> F[Ferramentas autorizadas]
-  F --> G[Ambiente de desenvolvimento]
-  G --> H[Resultado e evidências]
+  A[Developer] --> B[AI agent]
+  B --> C[MCP client]
+  C --> D[MCP tool server]
+  D --> E{Scope & permission check}
+  E -- allowed --> F[Authorized tools]
+  E -- sensitive --> A
+  F --> G[Remote dev environment]
+  G --> H[Results & evidence]
   H --> B
 ```
 
-*Diagrama didático de princípios de integração. Não expõe topologia, endpoints ou configuração operacional.*
+*Conceptual diagram; it does not include endpoints or operational configuration.*
 
-## Critérios de qualidade
-- Privilégios mínimos e autorização explícita para operações sensíveis;
-- Inspeção antes de modificação;
-- Testes e verificação de saídas;
-- Proteção de segredos e dados reais;
-- Sem pressupor que um teste local equivale a homologação em produção.
+## Key design decisions
 
-## Evidências e limites
-O repositório de infraestrutura é privado. Esta apresentação descreve o domínio de engenharia e os objetivos técnicos, sem divulgar credenciais, rotas internas ou dados operacionais.
+- **Least privilege:** tools work only inside allowed directories and scopes.
+- **Inspect before modify:** agents read the current state before changing it.
+- **Human approval for sensitive operations:** merges, deployments, migrations and destructive commands are never implied.
+- **Verifiable output:** every task returns evidence, such as command output and test results, that a person can review.
+- **Secret hygiene:** credentials and real user data never go into prompts, logs or repositories.
+
+## What this shows
+
+- Practical experience with **MCP**, AI agent tooling and remote Linux operations
+- Security thinking applied to agent automation
+- An infrastructure that supports the AI-assisted workflow described in [AI-assisted software engineering](./ai-engineering.md)
