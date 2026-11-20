@@ -8,7 +8,7 @@
 
 Brazil (UTC−3) · Open to remote roles in Brazil and internationally
 
-[The story](https://wesley-isaias.github.io/wesley-isaias/) · [Featured work](#featured-work) · [Tech stack](#tech-stack) · [Zayuni](https://app.zayuni.com) · [🇧🇷 Versão em português](./README.pt-BR.md)
+[LinkedIn](https://www.linkedin.com/in/wesley-isaias) · [The story](https://wesley-isaias.github.io/wesley-isaias/) · [Featured work](#featured-work) · [Tech stack](#tech-stack) · [Zayuni](https://app.zayuni.com) · [🇧🇷 Versão em português](./README.pt-BR.md)
 
 </div>
 
@@ -81,6 +81,4 @@ Most of my professional work is in private repositories. The case studies above 
 
 I'm open to **full-time or contract** roles in software development, full-stack development and AI engineering, remote or hybrid, in Brazil or internationally.
 
-<!-- Add your contact links here, e.g.:
-[LinkedIn](https://www.linkedin.com/in/your-handle) · [Email](mailto:you@example.com)
--->
+**[Connect on LinkedIn](https://www.linkedin.com/in/wesley-isaias)** · **[Read the story](https://wesley-isaias.github.io/wesley-isaias/)**

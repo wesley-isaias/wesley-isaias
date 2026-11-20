@@ -8,7 +8,7 @@
 
 Brasil (UTC−3) · Aberto a oportunidades remotas no Brasil e no exterior
 
-[A história](https://wesley-isaias.github.io/wesley-isaias/) · [Projetos](#projetos-em-destaque) · [Tecnologias](#tecnologias) · [Zayuni](https://app.zayuni.com) · [🇺🇸 English version](./README.md)
+[LinkedIn](https://www.linkedin.com/in/wesley-isaias) · [A história](https://wesley-isaias.github.io/wesley-isaias/) · [Projetos](#projetos-em-destaque) · [Tecnologias](#tecnologias) · [Zayuni](https://app.zayuni.com) · [🇺🇸 English version](./README.md)
 
 </div>
 
@@ -81,6 +81,4 @@ A maior parte do meu trabalho profissional está em repositórios privados. Os e
 
 Estou aberto a oportunidades **CLT, PJ ou contrato internacional** em desenvolvimento de software, desenvolvimento full-stack e engenharia de IA, remotas ou híbridas, no Brasil ou no exterior.
 
-<!-- Adicione aqui seus links de contato, por exemplo:
-[LinkedIn](https://www.linkedin.com/in/seu-usuario) · [E-mail](mailto:voce@exemplo.com)
--->
+**[Fale comigo no LinkedIn](https://www.linkedin.com/in/wesley-isaias)** · **[Leia a história](https://wesley-isaias.github.io/wesley-isaias/)**
