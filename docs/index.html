@@ -104,6 +104,7 @@ html[data-l="en"] .lang [data-set="en"], html[data-l="pt"] .lang [data-set="pt"]
 .chapter p { color: var(--ink); }
 .chapter p.sub { color: var(--muted); }
 .chapter p.status { font: 400 var(--s-1)/1.55 var(--f-mono); color: var(--gate); border: 1px dashed var(--gate); border-radius: 6px; padding: .6rem .8rem; }
+.chapter p.status.live { color: var(--ok); border: 1px solid var(--ok); }
 .facts { list-style: none; padding: 0; margin: 0; display: grid; gap: .55rem; }
 .facts li { display: grid; grid-template-columns: 1.1rem minmax(0, 1fr); gap: .5rem; }
 .facts li::before { content: ""; width: .5rem; height: .5rem; margin-top: .55rem; border-radius: 2px; background: var(--accent); }
@@ -260,34 +261,34 @@ html[data-l="en"] .lang [data-set="en"], html[data-l="pt"] .lang [data-set="pt"]
         <li><span class="en">The model can report "tests pass" without running anything.</span><span class="pt">O modelo pode dizer que "os testes passam" sem rodar nada.</span></li>
         <li><span class="en">Sending every task to the most expensive model burns money on work that needs no model.</span><span class="pt">Mandar toda tarefa para o modelo mais caro gasta dinheiro em trabalho que nem precisa de modelo.</span></li>
       </ul>
-      <p><span class="en">So every change follows the same path, and I design the infrastructure that removes what agents should never hold.</span><span class="pt">Por isso toda mudança segue o mesmo caminho, e desenho a infraestrutura que tira dos agentes o que eles nunca deveriam ter.</span></p>
+      <p><span class="en">So I built the infrastructure that takes away what agents should never hold, and every change follows the same path to production.</span><span class="pt">Por isso construí a infraestrutura que tira dos agentes o que eles nunca deveriam ter, e toda mudança segue o mesmo caminho até a produção.</span></p>
     </section>
 
     <section class="chapter" data-step="workspace" id="workspace">
-      <p class="eyebrow"><span class="en">Where agents work · MCP</span><span class="pt">Onde os agentes trabalham · MCP</span></p>
+      <p class="eyebrow"><span class="en">Where agents work · Zayuni DevWS</span><span class="pt">Onde os agentes trabalham · Zayuni DevWS</span></p>
       <h2><span class="en">A workspace with nothing to steal.</span><span class="pt">Um workspace sem nada a roubar.</span></h2>
-      <p class="status"><span class="en">Status: MCP gateway v0.6 in operation (14 tools). The Dev Workspace security layer below is built and tested offline, and goes through an independent security review before installation.</span><span class="pt">Status: gateway MCP v0.6 em operação (14 ferramentas). A camada de segurança do Dev Workspace descrita abaixo está implementada e testada offline, e passa por revisão de segurança independente antes da instalação.</span></p>
-      <p class="sub"><span class="en">Agents connect through the Model Context Protocol to an isolated development container. The container is treated as already compromised, so it holds no credentials and its outbound traffic is controlled.</span><span class="pt">Os agentes se conectam pelo Model Context Protocol a um contêiner de desenvolvimento isolado. O contêiner é tratado como já comprometido: não guarda credenciais, e o tráfego de saída é controlado.</span></p>
+      <p class="status live"><span class="en">In daily use since November 2026. Milestone: from ChatGPT on my phone, with my computer off, an agent created a branch, pushed and opened a pull request.</span><span class="pt">Em uso diário desde novembro de 2026. Marco: pelo ChatGPT no celular, com o computador desligado, um agente criou um branch, fez push e abriu um pull request.</span></p>
+      <p class="sub"><span class="en">I built my own MCP server: seven Docker services on a VPS. ChatGPT and Claude connect through the Model Context Protocol to an isolated development container. The container is treated as already compromised, so it holds no credentials and cannot reach the server's internal network.</span><span class="pt">Construí meu próprio servidor MCP: sete serviços Docker numa VPS. O ChatGPT e o Claude se conectam pelo Model Context Protocol a um contêiner de desenvolvimento isolado. O contêiner é tratado como já comprometido: não guarda credenciais e não alcança a rede interna do servidor.</span></p>
       <ul class="facts">
-        <li><span class="en">Cloudflare Access Managed OAuth signs the user in. The origin verifies the JWT on every <code>/mcp</code> request: RS256 only, exact issuer and audience, at most 60 s of clock skew.</span><span class="pt">O login é feito pelo Cloudflare Access Managed OAuth. A origem verifica o JWT em toda requisição <code>/mcp</code>: apenas RS256, issuer e audience exatos, no máximo 60 s de diferença de relógio.</span></li>
+        <li><span class="en">Cloudflare Access Managed OAuth signs me in, with TOTP MFA. The origin verifies the JWT on every <code>/mcp</code> request: RS256 only, exact issuer and audience, at most 60 s of clock skew.</span><span class="pt">O login é feito pelo Cloudflare Access Managed OAuth, com MFA por TOTP. A origem verifica o JWT em toda requisição <code>/mcp</code>: apenas RS256, issuer e audience exatos, no máximo 60 s de diferença de relógio.</span></li>
         <li><span class="en">When keys are unavailable, the verifier refuses. It fails closed.</span><span class="pt">Se as chaves não estiverem disponíveis, o verificador recusa. Ele falha fechado.</span></li>
         <li><span class="en">Cookies, <code>Authorization</code> and <code>Cf-Access-*</code> headers are stripped before anything reaches the workspace.</span><span class="pt">Cookies e cabeçalhos <code>Authorization</code> e <code>Cf-Access-*</code> são removidos antes de chegar ao workspace.</span></li>
       </ul>
-      <div class="stack"><span>MCP</span><span>Node.js 22 · node:crypto</span><span>Docker</span><span>Cloudflare Access</span></div>
+      <div class="stack"><span>MCP</span><span>Docker Compose · 7 services</span><span>Node.js 22 · node:crypto</span><span>Cloudflare Access · Tunnel</span><span>systemd · watchdog</span></div>
     </section>
 
     <section class="chapter" data-step="gateway" id="gateway">
       <p class="eyebrow"><span class="en">What leaves the box</span><span class="pt">O que sai do ambiente</span></p>
       <h2><span class="en">Every push is inspected. Every action is on the record.</span><span class="pt">Todo push é inspecionado. Toda ação fica registrada.</span></h2>
-      <p class="sub"><span class="en">In the Dev Workspace design, the only route to GitHub is a Git gateway I wrote with the Python standard library only. The GitHub token lives there and nowhere else.</span><span class="pt">No desenho do Dev Workspace, o único caminho até o GitHub é um gateway Git que escrevi só com a biblioteca padrão do Python. O token do GitHub fica ali e em nenhum outro lugar.</span></p>
+      <p class="sub"><span class="en">The only route to GitHub is a Git gateway I wrote with the Python standard library only. The GitHub token lives there and nowhere else, and only three repositories are allowed.</span><span class="pt">O único caminho até o GitHub é um gateway Git que escrevi só com a biblioteca padrão do Python. O token do GitHub fica ali e em nenhum outro lugar, e só três repositórios são permitidos.</span></p>
       <ul class="facts">
-        <li><span class="en">Each pushed pack is indexed in quarantine with <code>git index-pack --strict</code>, checked for fast-forward, and every changed path is compared against protected paths before it is forwarded.</span><span class="pt">Cada pacote enviado é indexado em quarentena com <code>git index-pack --strict</code>, verificado como fast-forward, e cada caminho alterado é comparado com os caminhos protegidos antes do encaminhamento.</span></li>
-        <li><span class="en">The audit log stores a closed, content-free schema, chained with HMAC. The kernel verifies each producer's identity (<code>SO_PEERCRED</code>).</span><span class="pt">O log de auditoria guarda um esquema fechado e sem conteúdo, encadeado por HMAC. O kernel verifica a identidade de cada produtor (<code>SO_PEERCRED</code>).</span></li>
+        <li><span class="en">Each pushed pack is indexed in quarantine with <code>git index-pack --strict</code> and checked for fast-forward. Pushes to <code>main</code> and changes under <code>.github/</code> are refused, and so is merge.</span><span class="pt">Cada pacote enviado é indexado em quarentena com <code>git index-pack --strict</code> e verificado como fast-forward. Push na <code>main</code> e mudanças em <code>.github/</code> são recusados, assim como merge.</span></li>
+        <li><span class="en">The audit log stores a closed, content-free schema, chained with HMAC, and exports checkpoints to a write-locked R2 bucket. The kernel verifies each producer's identity (<code>SO_PEERCRED</code>).</span><span class="pt">O log de auditoria guarda um esquema fechado e sem conteúdo, encadeado por HMAC, e exporta checkpoints para um bucket R2 travado contra alteração. O kernel verifica a identidade de cada produtor (<code>SO_PEERCRED</code>).</span></li>
         <li><span class="en">If the audit log does not acknowledge an event, the action does not happen.</span><span class="pt">Se o log de auditoria não confirmar o evento, a ação não acontece.</span></li>
       </ul>
 <pre class="receipt"><span class="cmd">$ pytest deploy/dev-access/git-gateway/tests</span>
 <span class="ok">81 passed</span>, 176 subtests passed</pre>
-      <a class="more" href="https://github.com/wesley-isaias/wesley-isaias/blob/main/projects/mcp.md"><span class="en">MCP workspace case study →</span><span class="pt">Estudo de caso do workspace MCP →</span></a>
+      <a class="more" href="https://github.com/wesley-isaias/wesley-isaias/blob/main/projects/mcp.md"><span class="en">Zayuni DevWS case study →</span><span class="pt">Estudo de caso do Zayuni DevWS →</span></a>
     </section>
 
     <section class="chapter" data-step="ship" id="ship">
@@ -350,7 +351,7 @@ html[data-l="en"] .lang [data-set="en"], html[data-l="pt"] .lang [data-set="pt"]
       <!-- nodes -->
       <g class="node" data-id="agents"><rect x="20" y="20" width="170" height="52" rx="8"/><text class="t1" x="34" y="42">ChatGPT · Claude</text><text class="t2" x="34" y="60">AI agents</text></g>
       <g class="node" data-id="verifier"><rect x="20" y="102" width="170" height="52" rx="8"/><text class="t1" x="34" y="124">JWT verifier</text><text class="t2" x="34" y="142">OAuth · fail-closed</text></g>
-      <g class="node" data-id="workspace"><rect x="20" y="196" width="170" height="52" rx="8"/><text class="t1" x="34" y="218">Dev Workspace</text><text class="t2" x="34" y="236">MCP · isolated</text></g>
+      <g class="node" data-id="workspace"><rect x="20" y="196" width="170" height="52" rx="8"/><text class="t1" x="34" y="218">Zayuni DevWS</text><text class="t2" x="34" y="236">MCP · isolated</text></g>
       <g class="node human" data-id="review"><rect x="210" y="350" width="170" height="52" rx="8"/><text class="t1" x="224" y="372">CI · review</text><text class="t2" x="224" y="390">tests · human approval</text></g>
       <g class="node" data-id="gateway"><rect x="20" y="268" width="170" height="52" rx="8"/><text class="t1" x="34" y="290">Git gateway</text><text class="t2" x="34" y="308">token · push inspection</text></g>
       <g class="node" data-id="audit"><rect x="210" y="268" width="170" height="52" rx="8"/><text class="t1" x="224" y="290">Audit log</text><text class="t2" x="224" y="308">HMAC chain · ACK</text></g>

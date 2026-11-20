@@ -14,7 +14,7 @@ Brasil (UTC−3) · Aberto a oportunidades remotas no Brasil e no exterior
 
 ---
 
-**O Zayuni é o produto: um SaaS de saúde que desenvolvo com agentes de IA dentro de um processo de entrega rígido.** Toda mudança começa de uma issue aprovada, passa por testes, CI e revisão, e só chega à produção por uma promoção explícita. Junto com o produto, desenho a infraestrutura que limita o que os agentes podem acessar: um **gateway MCP** em operação e uma **camada de segurança do Dev Workspace** implementada e testada, que passa por revisão de segurança antes da instalação.
+**O Zayuni é o produto: um SaaS de saúde que desenvolvo com agentes de IA dentro de um processo de entrega rígido.** Toda mudança começa de uma issue aprovada, passa por testes, CI e revisão, e só chega à produção por uma promoção explícita. Para que isso seja seguro, construí e opero o **Zayuni DevWS**, meu próprio servidor MCP: o ChatGPT e o Claude trabalham nos meus repositórios por um workspace isolado e sem credenciais, com cada push inspecionado e cada ação auditada.
 
 **[▶ Leia a história: um passeio pelo sistema inteiro, rolando a página](https://wesley-isaias.github.io/wesley-isaias/)**
 
@@ -31,9 +31,9 @@ Agenda, pacientes, histórico de atendimentos e financeiro num app para celular,
 
 ### 2 · A infraestrutura de IA por trás dele
 
-#### Zayuni Dev Workspace: acesso MCP seguro para agentes de IA
-*Onde os agentes trabalham.* Um gateway MCP está em operação com 14 ferramentas. A próxima camada, implementada e testada offline e aguardando revisão de segurança antes da instalação, dá ao ChatGPT e ao Claude um contêiner isolado, sem credenciais. Um gateway Git inspeciona cada push e mantém o token do GitHub fora do workspace, um verificador JWT protege o endpoint MCP, e um log de auditoria à prova de adulteração registra cada ação.
-<br>`MCP` `Python` `Node.js` `OAuth/JWT` `Docker` `Cloudflare Access` · **81 testes do gateway + checks de segurança offline na CI**
+#### Zayuni DevWS: meu próprio servidor MCP para agentes de IA
+*Onde os agentes trabalham.* Em uso diário desde novembro de 2026, inclusive pelo ChatGPT no celular. Sete serviços Docker: OAuth com MFA e checagem JWT que falha fechada, um workspace sem credenciais, um gateway Git que guarda o token e recusa push na `main`, um proxy de saída e um log de auditoria encadeado por HMAC, ancorado num bucket travado contra alteração.
+<br>`MCP` `Python` `Node.js` `OAuth/JWT` `Docker Compose` `Cloudflare` · **81 testes do gateway · branch → push → PR pelo celular, PC desligado**
 <br>**[Estudo de caso](./projects/pt-br/mcp.md)**
 
 ### 3 · A mesma disciplina, para um cliente

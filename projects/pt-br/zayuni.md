@@ -50,7 +50,7 @@ flowchart LR
 
 ## Construído com agentes de IA
 
-Desenvolvo o Zayuni com Claude, ChatGPT e outros agentes de código. O trabalho começa de uma issue aprovada, em branch próprio. Toda mudança passa por testes, CI e revisão humana, e nada chega à produção sem uma promoção explícita. O [workspace MCP](./mcp.md) nasceu desse trabalho, para limitar o que os agentes podem acessar.
+Desenvolvo o Zayuni com Claude, ChatGPT e outros agentes de código. O trabalho começa de uma issue aprovada, em branch próprio. Toda mudança passa por testes, CI e revisão humana, e nada chega à produção sem uma promoção explícita. O [Zayuni DevWS](./mcp.md), meu próprio servidor MCP, nasceu desse trabalho para limitar o que os agentes podem acessar. É por ele que o ChatGPT e o Claude trabalham neste repositório hoje.
 
 ## Próximos passos
 
