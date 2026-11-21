@@ -2,7 +2,7 @@
 
 # Wesley Isaias
 
-[![Public example tests](https://github.com/wesley-isaias/wesley-isaias/actions/workflows/public-example-tests.yml/badge.svg)](https://github.com/wesley-isaias/wesley-isaias/actions/workflows/public-example-tests.yml)
+[![mcp-secure-gateway CI](https://github.com/wesley-isaias/mcp-secure-gateway/actions/workflows/ci.yml/badge.svg)](https://github.com/wesley-isaias/mcp-secure-gateway/actions/workflows/ci.yml)
 
 **Desenvolvedor de Software · Produtos Digitais · Engenharia de IA e MCP**
 
@@ -62,9 +62,11 @@ Um experimento de outubro de 2026: o modelo só propõe ações por ferramentas 
 | **Infraestrutura** | Linux, Docker, Google Cloud Run e Cloud Build, Cloudflare, GitHub Actions, CircleCI |
 | **Práticas** | Revisão de pull requests, testes automatizados, staging → produção, migrações reversíveis |
 
-## Exemplo público reproduzível
+## Código aberto
 
-[**Política de autorização de ferramentas para agentes — Python, testes unitários e CI**](./examples/agent-policy/README.md). Exemplo independente e educacional, sem código extraído do MCP privado.
+#### [mcp-secure-gateway](https://github.com/wesley-isaias/mcp-secure-gateway)
+Os princípios do Zayuni DevWS em código público e executável: um servidor MCP em que toda chamada de ferramenta passa por autenticação com token (guardado só como hash), política que nega por padrão, limite de requisições por cliente e log de auditoria encadeado por HMAC, gravado antes de a ferramenta rodar. O README liga cada ameaça ao seu controle e ao teste que o comprova. Código independente, nada copiado do sistema privado.
+<br>`Python` `MCP` `FastMCP` `HMAC` `pytest` · **59 testes · CI em Python 3.11 e 3.13 · licença MIT**
 
 ## Como trabalho
 
