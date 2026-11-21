@@ -66,7 +66,7 @@ Um experimento de outubro de 2026: o modelo só propõe ações por ferramentas 
 
 #### [mcp-secure-gateway](https://github.com/wesley-isaias/mcp-secure-gateway)
 Os princípios do Zayuni DevWS em código público e executável: um servidor MCP em que toda chamada de ferramenta passa por autenticação com token (guardado só como hash), política que nega por padrão, limite de requisições por cliente e log de auditoria encadeado por HMAC, gravado antes de a ferramenta rodar. O README liga cada ameaça ao seu controle e ao teste que o comprova. Código independente, nada copiado do sistema privado.
-<br>`Python` `MCP` `FastMCP` `HMAC` `pytest` · **59 testes · CI em Python 3.11 e 3.13 · licença MIT**
+<br>`Python` `MCP` `FastMCP` `HMAC` `pytest` · **66 testes · 94% de cobertura · CI em Python 3.11 e 3.13 · licença MIT**
 
 ## Como trabalho
 

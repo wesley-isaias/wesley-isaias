@@ -65,4 +65,4 @@ A saída para a internet a partir do workspace está aberta hoje, por decisão m
 ## Relacionados
 
 - [DevCore](./devcore.md), um protótipo de laboratório que explora os mesmos princípios em tarefas autônomas de código
-- [mcp-secure-gateway](https://github.com/wesley-isaias/mcp-secure-gateway): os mesmos princípios em código público e executável (autenticação por token, limite de requisições, auditoria encadeada por HMAC, 59 testes)
+- [mcp-secure-gateway](https://github.com/wesley-isaias/mcp-secure-gateway): os mesmos princípios em código público e executável (autenticação por token, limite de requisições, auditoria encadeada por HMAC, 66 testes)
