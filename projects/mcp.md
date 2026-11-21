@@ -65,4 +65,4 @@ Outbound internet from the workspace is currently open by my decision, pending a
 ## Related
 
 - [DevCore](./devcore.md), a lab prototype that explores the same principles for autonomous coding tasks
-- [Public example: deny-by-default tool authorization](../examples/agent-policy/README.md)
+- [mcp-secure-gateway](https://github.com/wesley-isaias/mcp-secure-gateway): the same principles in public, runnable code (token auth, rate limiting, HMAC-chained audit log, 59 tests)
