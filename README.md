@@ -2,7 +2,7 @@
 
 # Wesley Isaias
 
-[![Public example tests](https://github.com/wesley-isaias/wesley-isaias/actions/workflows/public-example-tests.yml/badge.svg)](https://github.com/wesley-isaias/wesley-isaias/actions/workflows/public-example-tests.yml)
+[![mcp-secure-gateway CI](https://github.com/wesley-isaias/mcp-secure-gateway/actions/workflows/ci.yml/badge.svg)](https://github.com/wesley-isaias/mcp-secure-gateway/actions/workflows/ci.yml)
 
 **Software Developer · Digital Products · AI Engineering & MCP**
 
@@ -62,9 +62,11 @@ An experiment from October 2026: the model only proposes actions through allow-l
 | **Infrastructure** | Linux, Docker, Google Cloud Run & Cloud Build, Cloudflare, GitHub Actions, CircleCI |
 | **Practices** | Pull-request review, automated testing, staging → production releases, reversible migrations |
 
-## Reproducible public example
+## Open source
 
-[**AI tool authorization policy — Python + unit tests + CI**](./examples/agent-policy/README.md). A small, independent demonstration of deny-by-default checks. This is educational code, **not** extracted from the private MCP infrastructure.
+#### [mcp-secure-gateway](https://github.com/wesley-isaias/mcp-secure-gateway)
+The principles behind Zayuni DevWS in public, runnable code: an MCP server where every tool call passes bearer-token authentication (hashed tokens), a deny-by-default policy, per-client rate limiting and an HMAC-chained audit log written before the tool runs. The README maps each threat to its control and to the test that proves it. Independent code; nothing copied from the private system.
+<br>`Python` `MCP` `FastMCP` `HMAC` `pytest` · **66 tests · 94% coverage · CI on Python 3.11 and 3.13 · MIT license**
 
 ## How I work
 
